@@ -4,7 +4,7 @@
     session_start();
 
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-        header("location: inicio.php");
+        header("location: ../../index.php");
         exit;
     }
 
@@ -31,18 +31,25 @@
         //Fin espacio sin datos
 
         //Verificacion de credenciales de usuario
-        $query = "SELECT * FROM users WHERE nom = '$usr' AND cont = '$cont'";
+        $query = "SELECT * FROM usuario WHERE Nombre = '$usr' AND Contraseña = '$cont'";
         $result = mysqli_query($conexion, $query);
         
         if(mysqli_num_rows($result) == 1){
             $user = mysqli_fetch_assoc($result);
 
             // Iniciar la sesion
+            
             $_SESSION['usr'] = $user['usr'];
 
-            header("Location: Inicio.html");
+            header("Location: inicio.html");
         }else{
-            echo "Credenciales incorrectas";
+            echo '
+        <script>
+        alert("El usuario no existe, verifique los datos introducidos");
+        window.location = "Login.php";
+        </script>
+         ';
+         exit();
         }
 
 

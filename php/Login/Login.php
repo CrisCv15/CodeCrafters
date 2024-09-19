@@ -28,7 +28,7 @@
                     style="width: 1rem;"
                     >
                 </div>
-                <input class="form-control" type="text" id="usr" name="usr" placeholder="Usuario">
+                <input class="form-control" type="text" id="usr" name="usr" placeholder="Usuario" required autofocus>
             </div>
             <div class="input-group">
                 <div class="input-group-text" style="background-color: #00b2d0ff;">
@@ -43,7 +43,7 @@
                 class="form-control"
                 id="cont"
                 name="cont"
-                placeholder="Contrasena">
+                placeholder="Contrasena" required>
             </div>
             <div>
                 <input 

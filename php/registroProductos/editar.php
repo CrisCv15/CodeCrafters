@@ -1,5 +1,5 @@
 <?php
-include "../php/conexion_be.php";
+include "../conexion_be.php";
 $CodigoBarras = $_GET["CodigoBarras"];
 
 $sql = $conexion->query("select * from producto where CodigoBarras=$CodigoBarras");
@@ -12,7 +12,7 @@ $sql = $conexion->query("select * from producto where CodigoBarras=$CodigoBarras
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EditarProducto</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../css/styleRP.css">
 </head>
 <body>
 <form class="col-4 p-3 m-auto" method="POST">
