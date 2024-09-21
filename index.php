@@ -17,7 +17,7 @@ if (!isset($_SESSION['usr'])) {
     <link rel="stylesheet" href="./css/style.css">
     <script>
       function confirmarCerrarSesion(event) {
-    event.preventDefault(); /
+    event.preventDefault(); 
     
     const confirmar = confirm("¿Estás seguro de que quieres cerrar sesión?");
     
