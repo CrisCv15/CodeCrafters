@@ -1,4 +1,13 @@
+<?php
+session_start();
 
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['usr'])) {
+    // Si no hay sesión activa, redirige al login
+    header("Location: ./php/Login/Login.php");
+    exit;
+}
+?>
 <!doctype html>
 <html lang="es">
   <head>
@@ -6,18 +15,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BMos</title>
     <link rel="stylesheet" href="./css/style.css">
-</head>
+  </head>
   <body>
 
-    <div class="main">
-      
-    </div>
+    <div class="main"></div>
 
     <div class="barra-lateral">
         <div class="nombre-pagina">
-          
           <ion-icon name="home-outline" id="home"></ion-icon>
-            <span>BMos</span>
+          <span>BMos</span>
         </div>
         <button class="boton">
           <ion-icon name="add-outline"></ion-icon>
@@ -46,7 +52,7 @@
             <li>
               <a href="#">
                 <ion-icon name="stats-chart-outline"></ion-icon>
-                <span>Estadisticas</span>
+                <span>Estadísticas</span>
               </a>
             </li>
             <li>
@@ -58,23 +64,19 @@
           </ul>
         </nav>
 
-
         <div class="linea"></div>
 
         <div class="usuario">
-          <img src="./img/login-icon.svg" alt="">
+          <img src="./img/login-icon.svg" alt="Ícono de usuario">
           <div class="info-usuario">
             <div class="nombre-email">
-              <span class="nombre">Franco</span>
-              <span class="email">rivarola704@gmail.com</span>
+              <span class="nombre"><?php echo htmlspecialchars($_SESSION["nombre"]); ?></span>
+              <span class="email"><?php echo htmlspecialchars($_SESSION["email"]); ?></span>
             </div>
             <ion-icon name="ellipsis-vertical-outline"></ion-icon>
           </div>
         </div>
-
     </div>
-
-
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

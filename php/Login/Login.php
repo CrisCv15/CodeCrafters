@@ -1,5 +1,16 @@
 <?php
-    require "./control.php";
+// Verificar si ya hay una sesión activa antes de iniciar una nueva
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Solo iniciar la sesión si no está ya iniciada
+}
+
+// Si el usuario ya ha iniciado sesión, redirigirlo a la página de inicio
+if (isset($_SESSION['usr'])) {
+    header("Location: inicio.html");
+    exit;
+}
+
+require "./control.php"; // Incluye el archivo de control
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,51 +26,29 @@
             <img
             src="../../img/Logo.png"
             alt=""
-            style="width: 18rem;"
-            >
+            style="width: 18rem;">
         </div>
         <div class="text-center fs-4 p-2 fw-bold" style="color: #323232;">BIENVENIDO</div>
         <form class="p-3" action="" method="post">
             <div class="input-group">
-                <div class="input-group-text " style="background-color: #00b2d0ff;">
-                    <img
-                    src="../../img/username-icon.svg"
-                    alt=""
-                    style="width: 1rem;"
-                    >
+                <div class="input-group-text" style="background-color: #00b2d0ff;">
+                    <img src="../../img/username-icon.svg" alt="" style="width: 1rem;">
                 </div>
                 <input class="form-control" type="text" id="usr" name="usr" placeholder="Usuario" required autofocus>
             </div>
             <div class="input-group">
                 <div class="input-group-text" style="background-color: #00b2d0ff;">
-                    <img
-                    src="../../img/password-icon.svg"
-                    alt=""
-                    style="width: 1rem;"
-                    >
+                    <img src="../../img/password-icon.svg" alt="" style="width: 1rem;">
                 </div>
-                <input 
-                type="password"
-                class="form-control"
-                id="cont"
-                name="cont"
-                placeholder="Contrasena" required>
+                <input type="password" class="form-control" id="cont" name="cont" placeholder="Contraseña" required>
             </div>
             <div>
-                <input 
-                class="btn text-white w-100 mt-4"
-                type="submit"
-                value="Ingresar"
-                name="btn-ingresar"
-                style="background-color: #00b2d0ff;">
+                <input class="btn text-white w-100 mt-4" type="submit" value="Ingresar" name="btn-ingresar" style="background-color: #00b2d0ff;">
             </div>
         </form>
     </div>
-    </body>
-    <footer class="position-absolute bottom-0 w-100 bg-white text-center text-lg-start">
-        <div class=" text-center p-2">© 2024 Copyright:
-          <a href="AboutUss.html">Los4Hermanos</a>
-          
-        </div>
-      </footer>
+</body>
+<footer class="position-absolute bottom-0 w-100 bg-white text-center text-lg-start">
+    <div class="text-center p-2">© 2024 Copyright: <a href="AboutUs.html">Los4Hermanos</a></div>
+</footer>
 </html>

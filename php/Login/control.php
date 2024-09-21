@@ -1,58 +1,50 @@
 <?php
+// Verificar si ya hay una sesión activa antes de iniciar una nueva
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Solo iniciar la sesión si no está ya iniciada
+}
 
-    //Inicializar la sesion
-    session_start();
+// Conexión a la base de datos
+require_once '../conexion_be.php';
 
-    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-        header("location: ../../index.php");
-        exit;
+// Inicializar variables para los errores
+$usr_err = $cont_err = "";
+
+// Verificar si el formulario fue enviado
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Validar usuario
+    if (empty(trim($_POST["usr"]))) {
+        $usr_err = "Por favor, ingrese el nombre de usuario.";
+    } else {
+        $usr = trim($_POST["usr"]);
     }
 
-    require_once "../conexion_be.php";
+    // Validar contraseña
+    if (empty(trim($_POST["cont"]))) {
+        $cont_err = "Por favor, ingrese una contraseña.";
+    } else {
+        $cont = trim($_POST["cont"]);
+    }
 
-    $usr_err = $cont_err ="";
-
-    if($_SERVER["REQUEST_METHOD"] === "POST"){
-        $usr = $_POST['usr'];
-        $cont = $_POST['cont'];
-
-        //Espacio sin datos        
-        if(empty(trim($_POST["usr"]))){
-            $usr_err = "Por favor, ingrese el nombre de usuario";
-        }else{
-            $usr = trim($_POST["usr"]);//almacena datos
-        }
-
-        if(empty(trim($_POST["cont"]))){
-            $cont_err = "Por favor, ingrese una contraseña";
-        }else{
-            $cont = trim($_POST["cont"]);//almacena datos
-        }
-        //Fin espacio sin datos
-
-        //Verificacion de credenciales de usuario
+    // Verificar credenciales si no hay errores
+    if (empty($usr_err) && empty($cont_err)) {
+        // Consulta SQL para verificar las credenciales del usuario
         $query = "SELECT * FROM usuario WHERE Nombre = '$usr' AND Contraseña = '$cont'";
         $result = mysqli_query($conexion, $query);
-        
-        if(mysqli_num_rows($result) == 1){
+
+        if (mysqli_num_rows($result) == 1) {
             $user = mysqli_fetch_assoc($result);
-
-            // Iniciar la sesion
-            
-            $_SESSION['usr'] = $user['usr'];
-
-            header("Location: inicio.html");
-        }else{
+            $_SESSION['usr'] = $user['Nombre']; // Almacenar el nombre de usuario en la sesión
+            header("Location: inicio.php");
+            exit;
+        } else {
             echo '
-        <script>
-        alert("El usuario no existe, verifique los datos introducidos");
-        window.location = "Login.php";
-        </script>
-         ';
-         exit();
+            <script>
+            alert("Usuario o contraseña incorrectos.");
+            window.location = "Login.php";
+            </script>';
+            exit;
         }
-
-
     }
-
+}
 ?>
