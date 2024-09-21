@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Verificar si el usuario ha iniciado sesión
+
 if (!isset($_SESSION['usr'])) {
-    // Si no hay sesión activa, redirige al login
+    
     header("Location: ./php/Login/Login.php");
     exit;
 }
@@ -15,6 +15,18 @@ if (!isset($_SESSION['usr'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BMos</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script>
+      function confirmarCerrarSesion(event) {
+    event.preventDefault(); /
+    
+    const confirmar = confirm("¿Estás seguro de que quieres cerrar sesión?");
+    
+    if (confirmar) {
+        window.location.href = "./php/CerrarSesion/cerrar_sesion.php"; 
+        }
+}
+
+    </script>
   </head>
   <body>
 
@@ -56,7 +68,7 @@ if (!isset($_SESSION['usr'])) {
               </a>
             </li>
             <li>
-              <a href="./php/CerrarSesion/cerrar_sesion.php">
+              <a href="./php/CerrarSesion/cerrar_sesion.php" onclick="confirmarCerrarSesion(event)">
                 <ion-icon name="close-circle-outline"></ion-icon>
                 <span>Cerrar Sesión</span>
               </a>
