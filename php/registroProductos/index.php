@@ -6,14 +6,9 @@
     <title>RegistroProductos</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/e3fc2f4517.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../css/styleRP.css">
+    <link rel="stylesheet" href="style.css">
   </head>
 <body>
-  <script>
-    function confirmar(){
-      return confirm("Desea eliminar el producto?");
-    }
-  </script>
   <div class="table-wrapper" >
     <div class="col-smg-6" >
       <h1 class="text-center p-3">Administrador de Productos</h1>
@@ -37,19 +32,28 @@
         <input type="text" class="form-control" name="Descripcion">
     </div>
     <div class="mb-3">
-        <label for="exampleInputCodigo" class="form-label i">Ofertas</label>
-        <input type="text" class="form-control" name="Ofertas">
-    </div>
-    <div class="mb-3">
         <label for="exampleInputCodigo" class="form-label i">Stock</label>
         <input type="text" class="form-control" name="Stock">
     </div>
     <button type="submit" class="btn btn-primary" name="btnregistrar" value="ok" >Registrar</button>
+    <button type="submit" class="btn btn-primary" name="btnvolver">Volver</button>
+    
     <br><br>
     <?php
-        include "../conexion_be.php";
+        include "./conexion.php";
         include "./RegistroP.php";
         include "./controlEliminar.php";
+        if(isset($_POST['btnvolver'])){
+          header("Location: ../index.html");
+          exit();
+        }
+        if (isset($_GET['success'])) {
+            echo '<div class="alert alert-success">Producto Registrado Correctamente</div>';
+        } elseif (isset($_GET['error'])) {
+            echo '<div class="alert alert-danger">Producto No Registrado Correctamente</div>';
+        } elseif (isset($_GET['warning'])) {
+            echo '<div class="alert alert-warning">Alguno de los campos está vacío o contiene datos incorrectos</div>';
+        }
         ?>
     </form>
     <div class="col-10 p-4">
@@ -59,24 +63,22 @@
       <th scope="col">CodigoDeBarras</th>
       <th scope="col">Precio</th>
       <th scope="col">Descripcion</th>
-      <th scope="col">Oferta %</th>
       <th scope="col">Stock</th>
     </tr>
   </thead>
   <tbody>
     <?php
-    include "../conexion_be.php";
+    include "./conexion.php";
     $sql = $conexion ->query("select * from producto") ;
     while ($datos=$sql->fetch_object()) { ?>
         <tr>
       <td><?= $datos-> CodigoBarras ?></td>
       <td><?= $datos-> Precio ?></td>
       <td><?= $datos-> Descripcion ?></td>
-      <td><?= $datos-> Ofertas ?></td>
       <td><?= $datos-> Stock ?></td>
       <td>
         <a href="./editar.php?CodigoBarras=<?= $datos->CodigoBarras ?>" class="btn btn-small btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-        <a href="menu.php?CodigoBarras=<?= $datos->CodigoBarras ?>" onclick="return confirmar()" class="btn btn-small btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+        <a href="index.php?CodigoBarras=<?= $datos->CodigoBarras ?>" onclick="return confirmar()" class="btn btn-small btn-danger"><i class="fa-solid fa-trash-can"></i></a>
       </td>
     </tr>
     <?php }
