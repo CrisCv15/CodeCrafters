@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-09-2024 a las 01:34:52
+-- Tiempo de generación: 24-09-2024 a las 03:27:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,10 +44,16 @@ CREATE TABLE `caja` (
 CREATE TABLE `producto` (
   `CodigoBarras` varchar(50) NOT NULL,
   `Precio` decimal(10,2) NOT NULL,
-  `Descripción` varchar(255) NOT NULL,
-  `Ofertas` varchar(255) DEFAULT NULL,
+  `Descripcion` varchar(255) NOT NULL,
   `Stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`CodigoBarras`, `Precio`, `Descripcion`, `Stock`) VALUES
+('2222222222222', 200.00, 'jhbkbkjb', 100);
 
 -- --------------------------------------------------------
 
@@ -82,6 +88,13 @@ CREATE TABLE `usuario` (
   `Nombre` varchar(50) NOT NULL,
   `Contraseña` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`ID`, `Nombre`, `Contraseña`) VALUES
+(1, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -164,7 +177,7 @@ ALTER TABLE `ventasproductos`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
