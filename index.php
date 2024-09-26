@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+
+if (!isset($_SESSION['usr'])) {
+    
+    header("Location: ./php/Login/Login.php");
+    exit;
+}
+?>
 <!doctype html>
 <html lang="es">
   <head>
@@ -16,38 +26,41 @@
         }
       }
 
-      $(function(){
-            
-            $("#productos").on("click",function(){
-			var url = $(this).data("archivo");
-                $.get( url, function( data ) {
-				$( ".contenido-principal" ).html( data );
-				});//fin .get
-            });//fin click productos
+      // Función para cargar contenido dinámicamente
+      function cargarContenido(hash) {
+        let url = '';
+        switch (hash) {
+          case '#inicio':
+            url = './php/inicio.php';
+            break;
+          case '#ventas':
+            url = './php/ventas.php';
+            break;
+          case '#productos':
+            url = './php/registroProductos/menu.php';
+            break;
+          case '#estadisticas':
+            url = './php/estadisticas.php';
+            break;
+          default:
+            url = './php/inicio.php';
+            break;
+        }
 
-            $("#inicio").on("click",function(){
-			var url = $(this).data("archivo");
-                $.get( url, function( data ) {
-				$( ".contenido-principal" ).html( data );
-				});//fin .get
-            });//fin click inici
+        // Cargar contenido en el div 'contenido-principal'
+        $('.contenido-principal').load(url);
+      }
 
-            $("#ventas").on("click",function(){
-			var url = $(this).data("archivo");
-                $.get( url, function( data ) {
-				$( ".contenido-principal" ).html( data );
-				});//fin .get
-            });//fin click ventas
+      $(document).ready(function() {
+        $(window).on('hashchange', function() {
+          let hash = window.location.hash;
+          cargarContenido(hash);
+        });
 
-            $("#estadisticas").on("click",function(){
-			var url = $(this).data("archivo");
-                $.get( url, function( data ) {
-				$( ".contenido-principal" ).html( data );
-				});//fin .get
-            });//fin click estadistica
-
-        });//fin
-        
+        // Cargar contenido inicial (inicio por defecto)
+        let initialHash = window.location.hash || '#inicio';
+        cargarContenido(initialHash);
+      });
     </script>
   </head>
   <body>
@@ -69,10 +82,10 @@
 
         <nav class="navegacion">
           <ul>
-            <li><a href="#" id="inicio" data-archivo="./php/Ventas/inicio.php" ><ion-icon name="home-outline"></ion-icon>Inicio</a></li>
-            <li><a href="#" id="ventas" data-archivo="./inicio.php" ><ion-icon name="list-outline"></ion-icon>Ventas</a></li>
-            <li><a href="#" id="productos" data-archivo="./php/registroProductos/menu.php" ><ion-icon name="pricetags-outline"></ion-icon>Productos</a></li>
-            <li><a href="#" id="estadisticas" data-archivo="./php/estadisticas/inicio.php" ><ion-icon name="stats-chart-outline"></ion-icon>Estadísticas</a></li>
+            <li><a href="#inicio"><ion-icon name="home-outline"></ion-icon>Inicio</a></li>
+            <li><a href="#ventas"><ion-icon name="list-outline"></ion-icon>Ventas</a></li>
+            <li><a href="#productos"><ion-icon name="pricetags-outline"></ion-icon>Productos</a></li>
+            <li><a href="#estadisticas"><ion-icon name="stats-chart-outline"></ion-icon>Estadísticas</a></li>
             <li><a href="./php/CerrarSesion/cerrar_sesion.php" onclick="confirmarCerrarSesion(event)">
               <ion-icon name="close-circle-outline"></ion-icon>Cerrar Sesión</a></li>
           </ul>
