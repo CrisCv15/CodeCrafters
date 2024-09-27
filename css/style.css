@@ -11,7 +11,7 @@
 }
 
 *{
-    margin: 0;
+    margin: 0; 
     padding: 0;
     box-sizing: border-box;
     font-family: "Outfit", sans-serif;
@@ -93,6 +93,11 @@ body{
     color: var(--color-boton-texto);
 }
 
+.barra-lateral .boton:hover{
+    background-color: var(--color-menu-hover);
+    color: var(--color-menu-hover-texto);
+}
+
 .barra-lateral .boton ion-icon{
     min-width: 50px;
     font-size: 25px;
@@ -132,45 +137,7 @@ body{
     margin-bottom: 240px;
 }
 
-.barra-lateral .usuario{
-    width: 100%;
-    display: flex;
-}
 
-.barra-lateral .usuario img{
-    width: 50px;
-    min-width: 50px;
-    border-radius: 10px;
-}
-
-.barra-lateral .usuario .info-usuario{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: var(--color-texto);
-    overflow: hidden;
-}
-
-.barra-lateral .usuario .nombre-email{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-left: 5px;
-}
-
-.barra-lateral .usuario .nombre{
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.barra-lateral .usuario .email{
-    font-size: 13px;
-}
-
-.barra-lateral .usuario ion-icon{
-    font-size: 20px;
-}
 
 .boton-cerrar-sesion{
     width: 100%;
@@ -186,10 +153,9 @@ body{
     font-size: 16px;
 }
 
-/* Estilos para el contenido principal */
+
 .contenido-principal {
     flex-grow: 1;
     padding: 20px;
-    background-color: white;
     overflow-y: auto;
 }

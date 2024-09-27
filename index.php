@@ -31,7 +31,7 @@ if (!isset($_SESSION['usr'])) {
         let url = '';
         switch (hash) {
           case '#inicio':
-            url = './php/inicio.php';
+            url = './php/inicio/inicio.php';
             break; 
           case '#ventas':
             url = './php/ventas/Html.html';
@@ -93,13 +93,7 @@ if (!isset($_SESSION['usr'])) {
 
         <div class="linea"></div>
 
-        <div class="usuario">
-          <img src="./img/login-icon.svg" alt="Ícono de usuario">
-          <div class="info-usuario">
-            <span class="nombre">hola</span>
-            <span class="email">mundo</span>
-          </div>
-        </div>
+        
       </div>
 
       <!-- Contenedor de contenido principal -->
