@@ -1,0 +1,46 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.sidebar {
+  width: 200px;
+  min-height: 100vh;
+}
+
+.nav-link {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+.main-content {
+  background-color: #ffffff;
+}
+
+.sales-section {
+  max-width: 100%;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.sales-section h5 {
+  color: #333;
+  font-weight: bold;
+}
+
+.badge.bg-success {
+  font-size: 14px;
+  padding: 8px 12px;
+}
