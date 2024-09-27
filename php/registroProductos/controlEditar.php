@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = $conexion->query("UPDATE producto SET CodigoBarras='$CodigoB', Precio='$Precio', Descripcion='$Descripcion', Stock='$Stock' WHERE CodigoBarras='$CodigoBarras'");
     
     if ($sql) {
-        header("Location: index.php");
+        header("Location: menu.php");
     } else {
         echo "<div class='alert alert-danger'>Error al modificar</div>";
     }

@@ -96,8 +96,8 @@ if (!isset($_SESSION['usr'])) {
         <div class="usuario">
           <img src="./img/login-icon.svg" alt="Ícono de usuario">
           <div class="info-usuario">
-            <span class="nombre"><?php echo htmlspecialchars($_SESSION["nombre"]); ?></span>
-            <span class="email"><?php echo htmlspecialchars($_SESSION["email"]); ?></span>
+            <span class="nombre">hola</span>
+            <span class="email">mundo</span>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@ if (!isset($_SESSION['usr'])) {
       </div>
 
     </div>
-
+      
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

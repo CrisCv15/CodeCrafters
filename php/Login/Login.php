@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 // Verificar si ya hay una sesión activa antes de iniciar una nueva
 if (session_status() === PHP_SESSION_NONE) {
     session_start(); // Solo iniciar la sesión si no está ya iniciada
@@ -49,6 +51,6 @@ require "./control.php"; // Incluye el archivo de control
     </div>
 </body>
 <footer class="position-absolute bottom-0 w-100 bg-white text-center text-lg-start">
-    <div class="text-center p-2">© 2024 Copyright: <a href="AboutUs.html">Los4Hermanos</a></div>
+    <div class="text-center p-2">© 2024 Copyright: <a href="../../AboutUs/AboutUs.html">Los4Hermanos</a></div>
 </footer>
 </html>
