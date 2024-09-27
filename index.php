@@ -32,9 +32,9 @@ if (!isset($_SESSION['usr'])) {
         switch (hash) {
           case '#inicio':
             url = './php/inicio.php';
-            break;
+            break; 
           case '#ventas':
-            url = './php/ventas.php';
+            url = './php/ventas/Html.html';
             break;
           case '#productos':
             url = './php/registroProductos/menu.php';
