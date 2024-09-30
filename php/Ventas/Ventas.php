@@ -11,10 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fechaHora = date('Y-m-d H:i:s');
 
     // Insertar la nueva venta en la tabla Ventas
-    $queryVenta = "INSERT INTO Ventas (FechayHora, formaPago) VALUES ('$fechaHora', '$formaPago')";
+    $queryVenta = "INSERT INTO Ventas (FechayHora, NumeroTicket, FormaPago) VALUES ('$fechaHora', '$formaPago')";
     
     if ($conn->query($queryVenta) === TRUE) {
-        $numTicket = $conn->insert_id; //número de ticket de la venta recién creada
+        $numTicket = $conexion->insert_id; //número de ticket de la venta recién creada
         
         // Insertar los productos en la tabla ventasProductos
         foreach ($productos as $producto) {

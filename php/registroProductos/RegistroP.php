@@ -1,30 +1,39 @@
 <?php
-if(!empty($_POST["btnregistrar"])){
-    if(!empty($_POST["CodigoB"]) and !empty($_POST["Precio"]) and !empty($_POST["Descripcion"]) and !empty($_POST["Stock"]) ){
-        $CodigoB=$_POST["CodigoB"];
-        $Precio=$_POST["Precio"];
-        $Descripcion=$_POST["Descripcion"];
-        $Stock=$_POST["Stock"];
-        if(!preg_match("/^[0-9]{1,13}+$/",$CodigoB) || 
-           !preg_match("/^[0-9]+$/",$Precio) || 
-           !preg_match("/^[0-9]+$/",$Stock)  || 
-           !preg_match("/^[a-zA-Z\s]+$/",$Descripcion)){
-            header("Location: menu.php?warning=1");
-            exit();
-        }else{
-            $sql = $conexion->query("INSERT INTO producto(CodigoBarras, Precio, Descripcion, Stock) VALUES ('$CodigoB', $Precio, '$Descripcion', '$Stock')");
-            
-            if ($sql) {
-                header("Location: menu.php?success=1");
-                exit();
-            } else {
-                header("Location: menu.php?error=1");
-                exit();
-            }
-            }
-        }else {
-            header("Location: menu.php?warning=1");
-            exit();
-        }
+include "../conexion_be.php"; // Verifica que esta ruta sea correcta
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtener datos del formulario
+    $codigoB = $_POST['CodigoB'];
+    $precio = $_POST['Precio'];
+    $descripcion = $_POST['Descripcion'];
+    $stock = $_POST['Stock'];
+
+    // Validar campos
+    if (empty($codigoB) || empty($precio) || empty($descripcion) || empty($stock)) {
+        echo '<div class="alert alert-danger" role="alert">Error: Todos los campos son obligatorios.</div>';
+        exit();
     }
+
+    // Preparar la consulta SQL
+    $sql = "INSERT INTO producto (CodigoBarras, Precio, Descripcion, Stock) VALUES (?, ?, ?, ?)";
+    $stmt = $conexion->prepare($sql);
+
+    if ($stmt) {
+        // Vincular parámetros
+        $stmt->bind_param("sdsi", $codigoB, $precio, $descripcion, $stock);
+
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            echo '<div class="alert alert-success" role="alert">Producto registrado correctamente.</div>';
+        } else {
+            echo '<div class="alert alert-danger" role="alert">Error al registrar el producto: ' . $stmt->error . '</div>';
+        }
+        $stmt->close();
+    } else {
+        echo '<div class="alert alert-danger" role="alert">Error en la consulta: ' . $conexion->error . '</div>';
+    }
+} else {
+    echo '<div class="alert alert-danger" role="alert">Método no permitido.</div>';
+}
 ?>
+
