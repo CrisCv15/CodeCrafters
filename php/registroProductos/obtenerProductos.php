@@ -1,5 +1,5 @@
 <?php
-include "../conexion_be.php";  // Asegúrate de que la ruta a la conexión es correcta
+include "../conexion_be.php";  
 
 // Consulta para obtener todos los productos
 $sql = $conexion->query("SELECT * FROM producto");
@@ -21,10 +21,10 @@ while ($datos = $sql->fetch_object()) {
         <td>{$datos->Stock}</td>
         <td>
             <a href='editar.php?CodigoBarras={$datos->CodigoBarras}' class='btn btn-warning btn-small'>
-                <i class='fa-regular fa-pen-to-square'></i>
+                <i class='fa-regular fa-pen-to-square'></i> Editar
             </a>
-            <a href='./menu.php?CodigoBarras={$datos->CodigoBarras}' onclick='return confirmar()' class='btn btn-danger btn-small'>
-                <i class='fa-solid fa-trash-can'></i>
+            <a href='javascript:void(0);' class='btn btn-danger btn-small' onclick='confirmarEliminar(\"{$datos->CodigoBarras}\")'>
+                <i class='fa-solid fa-trash-can'></i> Eliminar
             </a>
         </td>
     </tr>";
@@ -40,3 +40,4 @@ echo $output;
 // Cerrar la conexión
 $conexion->close();
 ?>
+

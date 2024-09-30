@@ -1,5 +1,5 @@
 <?php
-include "../conexion_be.php"; // Verifica que esta ruta sea correcta
+include "../conexion_be.php"; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Obtener datos del formulario

@@ -65,53 +65,69 @@
 
   <script>
     $(document).ready(function () {
-      // Cargar productos al iniciar la página
-      cargarProductos();
+        // Cargar productos al iniciar la página
+        cargarProductos();
 
-      // Mostrar/Ocultar el formulario
-      $('#mostrarFormulario').click(function() {
-        $('#formularioRegistro').toggle();
-        $('#mensaje').empty();
-      });
-
-      // Función para cargar productos en la tabla
-      function cargarProductos() {
-        $.ajax({
-          url: './php/registroProductos/obtenerProductos.php',  // Ruta al archivo que devuelve los productos
-          method: 'GET',
-          success: function (data) {
-            $('#tablaProductos tbody').html(data);  // Inyectar el HTML recibido en la tabla
-          },
-          error: function () {
-            $('#mensaje').html('<div class="alert alert-danger">Error al cargar los productos.</div>');
-          }
+        // Mostrar/Ocultar el formulario
+        $('#mostrarFormulario').click(function() {
+            $('#formularioRegistro').toggle();
+            $('#mensaje').empty();
         });
-      }
 
-      // Evento para manejar el envío del formulario con AJAX
-      $('#formRegistroProducto').on('submit', function (e) {
-        e.preventDefault();  // Evitar que el formulario se envíe de manera tradicional
-        $.ajax({
-          url: './php/registroProductos/RegistroP.php',
-          method: 'POST',
-          data: $(this).serialize(),  // Enviar todos los campos del formulario
-          success: function (response) {
-            $('#mensaje').html(response);  // Mostrar mensaje de éxito o error
-            $('#formRegistroProducto')[0].reset();  // Limpiar el formulario
-            cargarProductos();  // Volver a cargar la tabla de productos
-          },
-          error: function () {
-            $('#mensaje').html('<div class="alert alert-danger">Error al registrar el producto.</div>');
-          }
+        // Función para cargar productos en la tabla
+        function cargarProductos() {
+            $.ajax({
+                url: './php/registroProductos/obtenerProductos.php',  // Ruta al archivo que devuelve los productos
+                method: 'GET',
+                success: function (data) {
+                    $('#tablaProductos tbody').html(data);  // Inyectar el HTML recibido en la tabla
+                },
+                error: function () {
+                    $('#mensaje').html('<div class="alert alert-danger">Error al cargar los productos.</div>');
+                }
+            });
+        }
+
+        // Evento para manejar el envío del formulario con AJAX
+        $('#formRegistroProducto').on('submit', function (e) {
+            e.preventDefault();  // Evitar que el formulario se envíe de manera tradicional
+            $.ajax({
+                url: './php/registroProductos/RegistroP.php',
+                method: 'POST',
+                data: $(this).serialize(),  // Enviar todos los campos del formulario
+                success: function (response) {
+                    $('#mensaje').html(response);  // Mostrar mensaje de éxito o error
+                    $('#formRegistroProducto')[0].reset();  // Limpiar el formulario
+                    cargarProductos();  // Volver a cargar la tabla de productos
+                },
+                error: function () {
+                    $('#mensaje').html('<div class="alert alert-danger">Error al registrar el producto.</div>');
+                }
+            });
         });
-      });
 
-      // Evento para el botón "Volver"
-      $('#btnVolver').on('click', function () {
-        window.location.href = '../../index.php';  // Redirigir a la página de inicio
-      });
+        // Función de confirmación para la eliminación de productos
+        window.confirmarEliminar = function(codigoB) {
+            if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+                $.ajax({
+                    url: './php/registroProductos/controlEliminar.php',  // Asegúrate de que la ruta es correcta
+                    method: 'POST',
+                    data: { CodigoB: codigoB },
+                    success: function(response) {
+                        $('#mensaje').html(response);
+                        cargarProductos();  // Recargar la tabla de productos
+                    },
+                    error: function() {
+                        $('#mensaje').html('<div class="alert alert-danger">Error al eliminar el producto.</div>');
+                    }
+                });
+            }
+        };
+
+        
     });
-  </script>
+</script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
