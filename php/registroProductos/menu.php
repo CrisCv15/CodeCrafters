@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <!-- Botón para mostrar/ocultar formulario -->
+  
   <div class="text-center">
     <button class="btn btn-primary" id="mostrarFormulario">Registrar Producto</button>
   </div>
@@ -74,13 +74,13 @@
             $('#mensaje').empty();
         });
 
-        // Función para cargar productos en la tabla
+        
         function cargarProductos() {
             $.ajax({
-                url: './php/registroProductos/obtenerProductos.php',  // Ruta al archivo que devuelve los productos
+                url: './php/registroProductos/obtenerProductos.php',  
                 method: 'GET',
                 success: function (data) {
-                    $('#tablaProductos tbody').html(data);  // Inyectar el HTML recibido en la tabla
+                    $('#tablaProductos tbody').html(data);  
                 },
                 error: function () {
                     $('#mensaje').html('<div class="alert alert-danger">Error al cargar los productos.</div>');
