@@ -34,7 +34,7 @@ if (!isset($_SESSION['usr'])) {
             url = './php/inicio/inicio.php';
             break; 
           case '#ventas':
-            url = './php/ventas/ventas.php';
+            url = './php/ventas/listaVentas.php';
             break;
           case '#caja':
             url = './php/caja/Html.html';
