@@ -12,16 +12,16 @@
 <body>
   <div class="table-wrapper">
     <div class="col-smg-6" id="AD">
-      <h1 class="text-center p-3">Administrador de Productos</h1>
+      <h1 class="text-center p-3" style="color: white;">Administrador de Productos</h1>
     </div>
   </div>
 
   
-  <div class="text-center">
-    <button class="btn btn-primary" id="mostrarFormulario">Registrar Producto</button>
+  <div class="text-center" style="color: white;">
+    <button class="btn btn-primary" id="mostrarFormulario" >Registrar Producto</button>
   </div>
 
-  <div class="container-fluid row r" id="formularioRegistro" style="display: none;">
+  <div class="container-fluid row r" id="formularioRegistro" style="display: none; color: white;">
     <form class="col-12 p-3 s" id="formRegistroProducto" method="POST">
       <h3 class="text-center text-secundary">Registro de productos</h3>
       <div class="mb-3">
@@ -55,6 +55,7 @@
           <th scope="col">Precio</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Stock</th>
+          <th scope="col">Opciones</th>
         </tr>
       </thead>
       <tbody>

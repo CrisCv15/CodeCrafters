@@ -8,6 +8,7 @@
     --color-menu-hover-texto: rgb(0,0,0);
     --color-boton: rgb(0,0,0);
     --color-boton-texto: rgb(255,255,255);
+    --color-fondo: #2c2b2b;
 }
 
 *{
@@ -20,7 +21,6 @@
 body{
     height: 100vh;
     width: 100%;
-    background-color: rgb(0, 178, 208);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,18 +31,19 @@ body{
     display: flex;
     height: 100%;
     width: 100%;
+    background-color: var(--color-fondo);
 }
 
 /* Barra lateral */
-.barra-lateral{
+.barra-lateral {
     width: 250px;
     height: 100%;
     overflow: hidden;
     padding: 25px 15px;
     background-color: var(--color-barra-lateral);
     transition: width 0.5s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2); /* Añadir sombra */
 }
-
 .mini-barra-lateral{
     width: 80px;
 }
@@ -156,6 +157,7 @@ body{
 
 .contenido-principal {
     flex-grow: 1;
-    padding: 20px;
+    
     overflow-y: auto;
+    height: 100vh;
 }
