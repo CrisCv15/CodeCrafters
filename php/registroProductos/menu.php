@@ -9,33 +9,20 @@
     <link rel="stylesheet" href="./css/styleRP.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/ModalRegistro.css">
-    
+    <script src="./js/menu.js"></script>
 </head>
 <body>
   <div class="table-wrapper">
-
-    <div class="col-smg-6" id="AD">
-      <h1 class="text-center p-3" style="color: white;">Administrador de Productos</h1>
-
     <div class="col-sm-6" id="AD">
       <h1 class="text-center p-3">Administrador de Productos</h1>
-
     </div>
     
   </div>
 
-  
-  <div class="text-center" style="color: white;">
-    <button class="btn btn-primary" id="mostrarFormulario" >Registrar Producto</button>
+  <!-- Botón para mostrar/ocultar formulario -->
+  <div class="text-center">
+    <button class="btn btn-primary" id="mostrarFormulario">Registrar Producto</button>
   </div>
-
-
-  <div class="container-fluid row r" id="formularioRegistro" style="display: none; color: white;">
-    <form class="col-12 p-3 s" id="formRegistroProducto" method="POST">
-      <h3 class="text-center text-secundary">Registro de productos</h3>
-      <div class="mb-3">
-          <label for="exampleInputCodigo" class="form-label i">Código de Barras</label>
-          <input type="text" class="form-control" name="CodigoB">
 
   <div class="modal" id="RegistModal" tabindex="-1" role="dialog" aria-labelledby="RegistModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -70,7 +57,6 @@
             </form>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -85,11 +71,7 @@
           <th scope="col">Precio</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Stock</th>
-
-          <th scope="col">Opciones</th>
-
           <th scope="col">Acciones</th>
-
         </tr>
       </thead>
       <tbody>
@@ -130,100 +112,6 @@
       </div>
     </div>
   </div>
-  <script>
-    $(document).ready(function () {
-        cargarProductos();
-        $('#mostrarFormulario').click(function() {
-            $('#RegistModal').modal('show'); // Cambiado para abrir el modal directamente
-            $('#mensaje').empty();
-        });
-
-
-        
-        function cargarProductos() {
-            $.ajax({
-                url: './php/registroProductos/obtenerProductos.php',  
-                method: 'GET',
-                success: function (data) {
-                    $('#tablaProductos tbody').html(data);  
-
-        function cargarProductos() {
-            $.ajax({
-                url: './php/registroProductos/obtenerProductos.php',
-                method: 'GET',
-                success: function (data) {
-                    $('#tablaProductos tbody').html(data);
-
-                },
-                error: function () {
-                    $('#mensaje').html('<div class="alert alert-danger">Error al cargar los productos.</div>');
-                }
-            });
-        }
-        $('#formRegistroProducto').on('submit', function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: './php/registroProductos/RegistroP.php',
-                method: 'POST',
-                data: $(this).serialize(),
-                success: function (response) {
-                    $('#mensaje').html(response);
-                    $('#formRegistroProducto')[0].reset();
-                    cargarProductos();
-                },
-                error: function () {
-                    $('#mensaje').html('<div class="alert alert-danger">Error al registrar el producto.</div>');
-                }
-            });
-        });
-        window.confirmarEliminar = function(codigoB) {
-            if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-                $.ajax({
-                    url: './php/registroProductos/controlEliminar.php',
-                    method: 'POST',
-                    data: { CodigoB: codigoB },
-                    success: function(response) {
-                        $('#mensaje').html(response);
-                        cargarProductos();
-                    },
-                    error: function() {
-                        $('#mensaje').html('<div class="alert alert-danger">Error al eliminar el producto.</div>');
-                    }
-                });
-            }
-        };
-        window.cargarDatosProducto = function(codigoB, precio, descripcion, stock) {
-            $('#codigoB').val(codigoB);
-            $('#precio').val(precio);
-            $('#descripcion').val(descripcion);
-            $('#stock').val(stock);
-        };
-        $('#editForm').on('submit', function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: './php/registroProductos/controlEditar.php', 
-                method: 'POST',
-                data: $(this).serialize(),  
-                success: function (response) {
-                    $('#mensaje').html(response);
-                    $('#editModal').modal('hide'); 
-                    cargarProductos();  
-                },
-                error: function () {
-                    $('#mensaje').html('<div class="alert alert-danger">Error al editar el producto.</div>');
-                }
-            });
-        });
-        $(document).on('click', '#editBtn', function () {
-            const row = $(this).closest('tr');
-            const codigoB = row.find('td:eq(0)').text();
-            const precio = row.find('td:eq(1)').text();
-            const descripcion = row.find('td:eq(2)').text();
-            const stock = row.find('td:eq(3)').text();
-            cargarDatosProducto(codigoB, precio, descripcion, stock);
-        });
-    });
-  </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
