@@ -13,7 +13,7 @@ include "../conexion_be.php";
      !preg_match("/^[0-9]+$/", $Stock)){
         echo '<div class="alert alert-danger">Error: Datos Incorrectos</div>';
     }else{
-        $sql = $conexion->query("UPDATE producto SET CodigoBarras='$CodigoB', Precio='$Precio', Descripcion='$Descripcion', Stock='$Stock' WHERE CodigoBarras='$CodigoBarras'");
+        $sql = $conexion->query("UPDATE producto SET CodigoBarras='$CodigoB', Precio='$Precio', Descripcion='$Descripcion', Stock='$Stock'");
         if($sql){
             echo "<div class='alert alert-success'>Producto modificado exitosamente.</div>";
         }else{
