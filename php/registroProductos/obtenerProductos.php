@@ -20,9 +20,8 @@ while ($datos = $sql->fetch_object()) {
         <td>{$datos->Descripcion}</td>
         <td>{$datos->Stock}</td>
         <td>
-            <a href='editar.php?CodigoBarras={$datos->CodigoBarras}' class='btn btn-warning btn-small'>
-                <i class='fa-regular fa-pen-to-square'></i> Editar
-            </a>
+        <button id='editBtn' class='btn btn-warning btn-small' data-toggle='modal' data-target='#editModal'> <i class='fa-regular fa-pen-to-square'></i> Editar</button>
+            
             <a href='javascript:void(0);' class='btn btn-danger btn-small' onclick='confirmarEliminar(\"{$datos->CodigoBarras}\")'>
                 <i class='fa-solid fa-trash-can'></i> Eliminar
             </a>
