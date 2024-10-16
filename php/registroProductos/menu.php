@@ -13,9 +13,9 @@
 </head>
 <body>
   <div class="table-wrapper">
-    <div class="col-sm-6" id="AD">
-      <h1 class="text-center p-3">Administrador de Productos</h1>
-    </div>
+  
+      <h1 class="text-center p-3" style="color: white;"">Administrador de Productos</h1>
+
     
   </div>
 
