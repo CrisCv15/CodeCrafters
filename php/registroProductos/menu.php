@@ -9,17 +9,17 @@
     <link rel="stylesheet" href="./css/styleRP.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/ModalRegistro.css">
-    <script serc="../js/modal.js"></script>
+    
 </head>
 <body>
   <div class="table-wrapper">
-<<<<<<< Updated upstream
+
     <div class="col-smg-6" id="AD">
       <h1 class="text-center p-3" style="color: white;">Administrador de Productos</h1>
-=======
+
     <div class="col-sm-6" id="AD">
       <h1 class="text-center p-3">Administrador de Productos</h1>
->>>>>>> Stashed changes
+
     </div>
     
   </div>
@@ -29,14 +29,14 @@
     <button class="btn btn-primary" id="mostrarFormulario" >Registrar Producto</button>
   </div>
 
-<<<<<<< Updated upstream
+
   <div class="container-fluid row r" id="formularioRegistro" style="display: none; color: white;">
     <form class="col-12 p-3 s" id="formRegistroProducto" method="POST">
       <h3 class="text-center text-secundary">Registro de productos</h3>
       <div class="mb-3">
           <label for="exampleInputCodigo" class="form-label i">Código de Barras</label>
           <input type="text" class="form-control" name="CodigoB">
-=======
+
   <div class="modal" id="RegistModal" tabindex="-1" role="dialog" aria-labelledby="RegistModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -70,7 +70,7 @@
             </form>
           </div>
         </div>
->>>>>>> Stashed changes
+
       </div>
     </div>
   </div>
@@ -85,11 +85,11 @@
           <th scope="col">Precio</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Stock</th>
-<<<<<<< Updated upstream
+
           <th scope="col">Opciones</th>
-=======
+
           <th scope="col">Acciones</th>
->>>>>>> Stashed changes
+
         </tr>
       </thead>
       <tbody>
@@ -137,7 +137,7 @@
             $('#RegistModal').modal('show'); // Cambiado para abrir el modal directamente
             $('#mensaje').empty();
         });
-<<<<<<< Updated upstream
+
 
         
         function cargarProductos() {
@@ -146,14 +146,14 @@
                 method: 'GET',
                 success: function (data) {
                     $('#tablaProductos tbody').html(data);  
-=======
+
         function cargarProductos() {
             $.ajax({
                 url: './php/registroProductos/obtenerProductos.php',
                 method: 'GET',
                 success: function (data) {
                     $('#tablaProductos tbody').html(data);
->>>>>>> Stashed changes
+
                 },
                 error: function () {
                     $('#mensaje').html('<div class="alert alert-danger">Error al cargar los productos.</div>');
