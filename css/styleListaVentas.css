@@ -1,0 +1,168 @@
+/* Colores y fuentes */
+:root {
+    --color-primario: #00a3e0;
+    --color-secundario: #f8f9fa;
+    --color-texto: #333;
+    --color-texto-secundario: #777;
+    --color-borde: #ccc;
+    --color-iconos: #5cb85c;
+    --color-icono-imprimir: #5a5a5a;
+    --color-fondo-tabla: #ffffff;
+    --color-boton: var(--color-primario);
+    --color-boton-hover: #007bbd;
+    --color-hover-fila: #f0f8ff;
+    --color-fondo: #2c2b2b;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estructura general de la sección de ventas */
+#ventas {
+    background-color: var(--color-fondo); 
+    color: var(--color-texto);
+    margin: 0;
+    font-size: 16px;
+    padding: 20px;
+}
+
+/* Estilo para el contenedor de ventas */
+#ventas .container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sección de búsqueda dentro de la sección de ventas */
+#ventas .search-section {
+    background-color: var(--color-primario);
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#ventas .search-section h2 {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+}
+
+#ventas .search-section input,
+#ventas .search-section button {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+#ventas .search-section input {
+    background-color: var(--color-secundario);
+    color: var(--color-texto);
+    border: 1px solid var(--color-borde);
+}
+
+#ventas .search-section button {
+    background-color: var(--color-boton);
+    color: white;
+    cursor: pointer;
+}
+
+#ventas .search-section button:hover {
+    background-color: var(--color-boton-hover);
+}
+
+#ventas .checkbox-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+#ventas .checkbox-container label {
+    font-weight: normal;
+}
+
+/* Tabla de ventas */
+#ventas .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-fondo-tabla);
+    margin-bottom: 20px;
+}
+
+#ventas .table thead th {
+    background-color: var(--color-primario);
+    color: white;
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+}
+
+#ventas .table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid var(--color-borde);
+    text-align: left;
+    font-size: 14px;
+    color: var(--color-texto);
+}
+
+#ventas .table tbody tr:hover {
+    background-color: var(--color-hover-fila);
+}
+
+#ventas .table tbody td .icono-opcion {
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#ventas .table tbody td .icono-opcion.ver {
+    color: var(--color-iconos);
+}
+
+#ventas .table tbody td .icono-opcion.imprimir {
+    color: var(--color-icono-imprimir);
+}
+
+/* Paginación */
+#ventas .pagination {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 0;
+}
+
+#ventas .pagination li {
+    margin: 0 5px;
+}
+
+#ventas .pagination li a {
+    color: var(--color-primario);
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid var(--color-borde);
+    border-radius: 4px;
+}
+
+#ventas .pagination li a:hover {
+    background-color: var(--color-boton-hover);
+    color: white;
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    #ventas .search-section input,
+    #ventas .search-section button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #ventas .checkbox-container {
+        flex-direction: column;
+    }
+
+    #ventas .table thead,
+    #ventas .table tbody {
+        font-size: 12px;
+    }
+}

@@ -1,5 +1,5 @@
 <?php
-include "../conexion_be.php"; 
+include ".,/conexion_be.php"; 
 
 // Procesar la venta
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $cantidad = $conexion->real_escape_string($producto['cantidad']);
 
             // Insertar en ventasProductos
-            $sqlVentasProductos = "INSERT INTO ventasproductos (NumeroTicket, CodigoBarras) VALUES (?, ?)";
+            $sqlVentasProductos = "INSERT INTO ventasProductos (numeTicket, codBarras) VALUES (?, ?)";
             $stmtVentasProductos = $conexion->prepare($sqlVentasProductos);
             $stmtVentasProductos->bind_param("is", $numTicket, $codigoBarras);
             $stmtVentasProductos->execute();

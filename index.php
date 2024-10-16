@@ -34,7 +34,10 @@ if (!isset($_SESSION['usr'])) {
             url = './php/inicio/inicio.php';
             break; 
           case '#ventas':
-            url = './php/ventas/Html.html';
+            url = './php/ventas/listaVentas.php';
+            break;
+          case '#caja':
+            url = './php/caja/Html.html';
             break;
           case '#productos':
             url = './php/registroProductos/menu.php';
@@ -84,6 +87,7 @@ if (!isset($_SESSION['usr'])) {
           <ul>
             <li><a href="#inicio"><ion-icon name="home-outline"></ion-icon>Inicio</a></li>
             <li><a href="#ventas"><ion-icon name="list-outline"></ion-icon>Ventas</a></li>
+            <li><a href="#caja"><ion-icon name="cart-outline"></ion-icon>Caja</a></li>
             <li><a href="#productos"><ion-icon name="pricetags-outline"></ion-icon>Productos</a></li>
             <li><a href="#estadisticas"><ion-icon name="stats-chart-outline"></ion-icon>Estadísticas</a></li>
             <li><a href="./php/CerrarSesion/cerrar_sesion.php" onclick="confirmarCerrarSesion(event)">

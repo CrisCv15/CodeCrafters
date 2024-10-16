@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2024 a las 03:27:10
+-- Tiempo de generación: 03-10-2024 a las 03:25:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -35,6 +35,13 @@ CREATE TABLE `caja` (
   `ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `caja`
+--
+
+INSERT INTO `caja` (`FechayHora`, `Apertura`, `Cierre`, `Registrototal`, `ID`) VALUES
+('2024-10-03 02:40:51', 10.00, 10.00, 10.00, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -53,7 +60,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`CodigoBarras`, `Precio`, `Descripcion`, `Stock`) VALUES
-('2222222222222', 200.00, 'jhbkbkjb', 100);
+('1111111111111', 200.00, 'Camiseta azul de algodón', 100),
+('3333333333333', 200.00, 'prueba', 12),
+('88888888888', 200.00, 'prueba ', 12);
 
 -- --------------------------------------------------------
 
@@ -105,8 +114,16 @@ INSERT INTO `usuario` (`ID`, `Nombre`, `Contraseña`) VALUES
 CREATE TABLE `ventas` (
   `FechayHora` datetime DEFAULT NULL,
   `NumeroTicket` int(11) NOT NULL,
-  `FormaPago` varchar(50) NOT NULL
+  `FormaPago` varchar(50) NOT NULL,
+  `cantidad` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`FechayHora`, `NumeroTicket`, `FormaPago`, `cantidad`) VALUES
+('2024-10-03 02:40:51', 76575776, 'Efectivo', 10);
 
 -- --------------------------------------------------------
 
@@ -118,6 +135,13 @@ CREATE TABLE `ventasproductos` (
   `NumeroTicket` int(11) NOT NULL,
   `CodigoBarras` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventasproductos`
+--
+
+INSERT INTO `ventasproductos` (`NumeroTicket`, `CodigoBarras`) VALUES
+(76575776, '88888888888');
 
 --
 -- Índices para tablas volcadas
@@ -183,7 +207,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `NumeroTicket` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `NumeroTicket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76575777;
 
 --
 -- Restricciones para tablas volcadas
