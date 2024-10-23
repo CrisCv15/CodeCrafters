@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2024 a las 03:25:13
+-- Tiempo de generación: 23-10-2024 a las 03:04:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `caja` (
   `FechayHora` datetime NOT NULL,
   `Apertura` decimal(10,2) NOT NULL,
-  `Cierre` decimal(10,2) NOT NULL,
-  `Registrototal` decimal(10,2) NOT NULL,
-  `ID` int(11) DEFAULT NULL
+  `Cierre` decimal(10,2) DEFAULT NULL,
+  `Registrototal` decimal(10,2) DEFAULT NULL,
+  `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -49,7 +49,7 @@ INSERT INTO `caja` (`FechayHora`, `Apertura`, `Cierre`, `Registrototal`, `ID`) V
 --
 
 CREATE TABLE `producto` (
-  `CodigoBarras` varchar(50) NOT NULL,
+  `CodigoBarras` decimal(13,0) NOT NULL,
   `Precio` decimal(10,2) NOT NULL,
   `Descripcion` varchar(255) NOT NULL,
   `Stock` int(11) NOT NULL
@@ -60,31 +60,8 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`CodigoBarras`, `Precio`, `Descripcion`, `Stock`) VALUES
-('1111111111111', 200.00, 'Camiseta azul de algodón', 100),
-('3333333333333', 200.00, 'prueba', 12),
-('88888888888', 200.00, 'prueba ', 12);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `promoción`
---
-
-CREATE TABLE `promoción` (
-  `CodigoPromoción` varchar(50) NOT NULL,
-  `Precio` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `promociónproductos`
---
-
-CREATE TABLE `promociónproductos` (
-  `CodigoBarras` varchar(50) NOT NULL,
-  `CodigoPromoción` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(1111111111111, 200.00, 'njnnk', 122),
+(3333333333333, 200.00, 'bkjnk', 2000000);
 
 -- --------------------------------------------------------
 
@@ -123,7 +100,8 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`FechayHora`, `NumeroTicket`, `FormaPago`, `cantidad`) VALUES
-('2024-10-03 02:40:51', 76575776, 'Efectivo', 10);
+('2024-10-03 02:40:51', 12212121, 'tarjeta', 20),
+('2024-10-03 02:40:51', 76575776, 'contado', 10);
 
 -- --------------------------------------------------------
 
@@ -161,19 +139,6 @@ ALTER TABLE `producto`
   ADD PRIMARY KEY (`CodigoBarras`);
 
 --
--- Indices de la tabla `promoción`
---
-ALTER TABLE `promoción`
-  ADD PRIMARY KEY (`CodigoPromoción`);
-
---
--- Indices de la tabla `promociónproductos`
---
-ALTER TABLE `promociónproductos`
-  ADD PRIMARY KEY (`CodigoBarras`,`CodigoPromoción`),
-  ADD KEY `CodigoPromoción` (`CodigoPromoción`);
-
---
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -185,13 +150,6 @@ ALTER TABLE `usuario`
 ALTER TABLE `ventas`
   ADD PRIMARY KEY (`NumeroTicket`),
   ADD KEY `FechayHora` (`FechayHora`);
-
---
--- Indices de la tabla `ventasproductos`
---
-ALTER TABLE `ventasproductos`
-  ADD PRIMARY KEY (`NumeroTicket`,`CodigoBarras`),
-  ADD KEY `CodigoBarras` (`CodigoBarras`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -220,24 +178,10 @@ ALTER TABLE `caja`
   ADD CONSTRAINT `caja_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `usuario` (`ID`);
 
 --
--- Filtros para la tabla `promociónproductos`
---
-ALTER TABLE `promociónproductos`
-  ADD CONSTRAINT `promociónproductos_ibfk_1` FOREIGN KEY (`CodigoBarras`) REFERENCES `producto` (`CodigoBarras`),
-  ADD CONSTRAINT `promociónproductos_ibfk_2` FOREIGN KEY (`CodigoPromoción`) REFERENCES `promoción` (`CodigoPromoción`);
-
---
 -- Filtros para la tabla `ventas`
 --
 ALTER TABLE `ventas`
   ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`FechayHora`) REFERENCES `caja` (`FechayHora`);
-
---
--- Filtros para la tabla `ventasproductos`
---
-ALTER TABLE `ventasproductos`
-  ADD CONSTRAINT `ventasproductos_ibfk_1` FOREIGN KEY (`NumeroTicket`) REFERENCES `ventas` (`NumeroTicket`),
-  ADD CONSTRAINT `ventasproductos_ibfk_2` FOREIGN KEY (`CodigoBarras`) REFERENCES `producto` (`CodigoBarras`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
