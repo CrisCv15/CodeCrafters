@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2024 a las 03:04:16
+-- Tiempo de generación: 27-10-2024 a las 23:25:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -89,7 +89,7 @@ INSERT INTO `usuario` (`ID`, `Nombre`, `Contraseña`) VALUES
 --
 
 CREATE TABLE `ventas` (
-  `FechayHora` datetime DEFAULT NULL,
+  `FechayHora` datetime NOT NULL,
   `NumeroTicket` int(11) NOT NULL,
   `FormaPago` varchar(50) NOT NULL,
   `cantidad` int(3) NOT NULL
@@ -100,8 +100,8 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`FechayHora`, `NumeroTicket`, `FormaPago`, `cantidad`) VALUES
-('2024-10-03 02:40:51', 12212121, 'tarjeta', 20),
-('2024-10-03 02:40:51', 76575776, 'contado', 10);
+('0000-00-00 00:00:00', 7676767, 'Tarjeta', 20),
+('0000-00-00 00:00:00', 76575776, 'Efectivo', 10);
 
 -- --------------------------------------------------------
 
@@ -119,7 +119,9 @@ CREATE TABLE `ventasproductos` (
 --
 
 INSERT INTO `ventasproductos` (`NumeroTicket`, `CodigoBarras`) VALUES
-(76575776, '88888888888');
+(76575776, '88888888888'),
+(76575776, '1111111111111'),
+(76575776, '3333333333333');
 
 --
 -- Índices para tablas volcadas
@@ -148,8 +150,7 @@ ALTER TABLE `usuario`
 -- Indices de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`NumeroTicket`),
-  ADD KEY `FechayHora` (`FechayHora`);
+  ADD PRIMARY KEY (`NumeroTicket`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -176,12 +177,6 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `caja`
   ADD CONSTRAINT `caja_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `usuario` (`ID`);
-
---
--- Filtros para la tabla `ventas`
---
-ALTER TABLE `ventas`
-  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`FechayHora`) REFERENCES `caja` (`FechayHora`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
