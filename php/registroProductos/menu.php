@@ -13,9 +13,9 @@
 </head>
 <body>
   <div class="table-wrapper">
-  
-      <h1 class="text-center p-3" style="color: white;"">Administrador de Productos</h1>
-
+    <div class="col-sm-6" id="AD">
+      <h1 class="text-center p-3">Administrador de Productos</h1>
+    </div>
     
   </div>
 
@@ -92,7 +92,7 @@
           <form id="editForm">
             <div class="form-group">
               <label for="codigoB">Código de Barras:</label>
-              <input type="number" id="codigoB" name="CodigoB" class="form-control" required>
+              <input type="number" id="codigoB" name="CodigoB" class="form-control" readonly required>
             </div>
             <div class="form-group">
               <label for="precio">Precio:</label>
