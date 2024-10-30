@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2024 a las 23:25:46
+-- Tiempo de generación: 30-10-2024 a las 06:41:03
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -90,7 +90,7 @@ INSERT INTO `usuario` (`ID`, `Nombre`, `Contraseña`) VALUES
 
 CREATE TABLE `ventas` (
   `FechayHora` datetime NOT NULL,
-  `NumeroTicket` int(11) NOT NULL,
+  `NumeroTicket` decimal(11,0) NOT NULL,
   `FormaPago` varchar(50) NOT NULL,
   `cantidad` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -110,7 +110,7 @@ INSERT INTO `ventas` (`FechayHora`, `NumeroTicket`, `FormaPago`, `cantidad`) VAL
 --
 
 CREATE TABLE `ventasproductos` (
-  `NumeroTicket` int(11) NOT NULL,
+  `NumeroTicket` decimal(11,0) NOT NULL,
   `CodigoBarras` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -161,12 +161,6 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `usuario`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `ventas`
---
-ALTER TABLE `ventas`
-  MODIFY `NumeroTicket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76575777;
 
 --
 -- Restricciones para tablas volcadas
