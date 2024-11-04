@@ -127,22 +127,24 @@
                     <div class="col-4">
                         <div class="bg-light p-3 rounded">
                             <h6>Total Venta: <span id="totalVenta">$0</span></h6>
-                            <input type="hidden" name="totalVenta" id="totalVentaInput"> 
+                            <input type="hidden" name="totalVenta" id="totalVentaInput">
+                            
+                            <input type="hidden" name="productos[]" id="productosInput">
                             <div class="mb-2">
                                 <label class="form-label">Numero de Ticket</label>
-                                <input type="number" class="form-control" name="nroTicket" id="nroTicket" placeholder="Ingrese Numero de Ticket">
+                                <input type="number" class="form-control" name="nroTicket" id="nroTicket" placeholder="Ingrese Numero de Ticket" required>
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Método de Pago</label>
-                                <select class="form-select" name="formaPago" id="paymentMethod">
+                                <select class="form-select" name="formaPago" id="paymentMethod" required>
                                     <option>Crédito</option>
                                     <option>Débito</option>
                                     <option>Efectivo</option>
                                 </select>
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Monto Efectivo</label>
-                                <input type="text" class="form-control" name="montoEfectivo" id="montoEfectivo" placeholder="Ingrese monto efectivo">
+                                <strong>Monto Efectivo: $<span id="montoEfectivo">0.00</span></strong>
+                                <input type="number" id="montoEfectivoInput" placeholder="Ingrese Monto Efectivo" oninput="actualizarMontoEfectivo()" />
                             </div>
                             <div class="mb-2">
                                 <p>Vuelto: <span id="vuelto">$0</span></p>
