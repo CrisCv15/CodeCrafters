@@ -28,7 +28,6 @@ if (!isset($_SESSION['usr'])) {
             <a href="#productos" class="boton">Gestionar Productos</a>
             <a href="#ventas" class="boton">Ver Ventas</a>
             <a href="#caja" class="boton">Ver Caja</a>
-            <a href="#estadisticas" class="boton">Ver Estadísticas</a>
         </div>
     </div>
 </body>

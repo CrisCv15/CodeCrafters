@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (mysqli_num_rows($result) == 1) {
             $user = mysqli_fetch_assoc($result);
             $_SESSION['usr'] = $user['Nombre']; // Almacenar el nombre de usuario en la sesión
-            header("Location: inicio.php");
+            header("Location: ../../index.php");
             exit;
         } else {
             echo '

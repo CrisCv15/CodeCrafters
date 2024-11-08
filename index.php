@@ -42,9 +42,7 @@ if (!isset($_SESSION['usr'])) {
           case '#productos':
             url = './php/registroProductos/menu.php';
             break;
-          case '#estadisticas':
-            url = './php/estadisticas.php';
-            break;
+          
           default:
             url = './php/inicio.php';
             break;
@@ -89,7 +87,6 @@ if (!isset($_SESSION['usr'])) {
             <li><a href="#ventas"><ion-icon name="list-outline"></ion-icon>Ventas</a></li>
             <li><a href="#caja"><ion-icon name="cart-outline"></ion-icon>Caja</a></li>
             <li><a href="#productos"><ion-icon name="pricetags-outline"></ion-icon>Productos</a></li>
-            <li><a href="#estadisticas"><ion-icon name="stats-chart-outline"></ion-icon>Estadísticas</a></li>
             <li><a href="./php/CerrarSesion/cerrar_sesion.php" onclick="confirmarCerrarSesion(event)">
               <ion-icon name="close-circle-outline"></ion-icon>Cerrar Sesión</a></li>
           </ul>
@@ -105,7 +102,7 @@ if (!isset($_SESSION['usr'])) {
         <!-- Aquí se cargará el contenido dinámico -->
       </div>
 
-    </div>
+    </div> 
       
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
