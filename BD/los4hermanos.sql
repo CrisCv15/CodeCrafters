@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2024 a las 06:41:03
+-- Tiempo de generación: 08-11-2024 a las 06:50:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `caja` (
   `FechayHora` datetime NOT NULL,
-  `Apertura` decimal(10,2) NOT NULL,
-  `Cierre` decimal(10,2) DEFAULT NULL,
+  `Apertura` time NOT NULL,
+  `Cierre` time DEFAULT NULL,
   `Registrototal` decimal(10,2) DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -40,7 +40,9 @@ CREATE TABLE `caja` (
 --
 
 INSERT INTO `caja` (`FechayHora`, `Apertura`, `Cierre`, `Registrototal`, `ID`) VALUES
-('2024-10-03 02:40:51', 10.00, 10.00, 10.00, 1);
+('2024-11-08 02:47:44', '02:47:44', '02:48:31', 0.00, 1),
+('2024-11-08 02:48:34', '02:48:34', '02:48:36', 0.00, 1),
+('2024-11-08 02:49:26', '02:49:26', '02:49:44', 400.00, 1);
 
 -- --------------------------------------------------------
 
@@ -60,7 +62,7 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`CodigoBarras`, `Precio`, `Descripcion`, `Stock`) VALUES
-(1111111111111, 200.00, 'njnnk', 122),
+(1111111111111, 200.00, 'njnnk', 113),
 (3333333333333, 200.00, 'bkjnk', 2000000);
 
 -- --------------------------------------------------------
@@ -92,16 +94,23 @@ CREATE TABLE `ventas` (
   `FechayHora` datetime NOT NULL,
   `NumeroTicket` decimal(11,0) NOT NULL,
   `FormaPago` varchar(50) NOT NULL,
-  `cantidad` int(3) NOT NULL
+  `totalVenta` decimal(11,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`FechayHora`, `NumeroTicket`, `FormaPago`, `cantidad`) VALUES
+INSERT INTO `ventas` (`FechayHora`, `NumeroTicket`, `FormaPago`, `totalVenta`) VALUES
+('0000-00-00 00:00:00', 0, '', 0),
+('2024-11-08 02:49:38', 1212, 'Crédito', 400),
+('2024-11-01 20:49:49', 6567, 'Crédito', 400),
+('2024-11-01 20:54:12', 111111, 'Débito', 1000),
+('2024-11-01 20:08:00', 276477, 'Crédito', 400),
+('2024-11-01 19:51:21', 2121212, 'Crédito', 600),
 ('0000-00-00 00:00:00', 7676767, 'Tarjeta', 20),
-('0000-00-00 00:00:00', 76575776, 'Efectivo', 10);
+('0000-00-00 00:00:00', 76575776, 'Efectivo', 10),
+('2024-11-01 19:50:05', 4837684982, 'Crédito', 400);
 
 -- --------------------------------------------------------
 
@@ -111,17 +120,18 @@ INSERT INTO `ventas` (`FechayHora`, `NumeroTicket`, `FormaPago`, `cantidad`) VAL
 
 CREATE TABLE `ventasproductos` (
   `NumeroTicket` decimal(11,0) NOT NULL,
-  `CodigoBarras` varchar(50) NOT NULL
+  `CodigoBarras` varchar(50) NOT NULL,
+  `cantidadProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ventasproductos`
 --
 
-INSERT INTO `ventasproductos` (`NumeroTicket`, `CodigoBarras`) VALUES
-(76575776, '88888888888'),
-(76575776, '1111111111111'),
-(76575776, '3333333333333');
+INSERT INTO `ventasproductos` (`NumeroTicket`, `CodigoBarras`, `cantidadProducto`) VALUES
+(6567, '1111111111111', 2),
+(111111, '1111111111111', 5),
+(1212, '1111111111111', 2);
 
 --
 -- Índices para tablas volcadas
