@@ -1,17 +1,17 @@
 // Definición de la función toggleCaja
 function toggleCaja() {
-  const cajaEstado = document.getElementById("cajaStatus");
-  const btnToggle = document.getElementById("toggleCaja");
+    const cajaEstado = document.getElementById("cajaStatus");
+    const btnToggle = document.getElementById("toggleCaja");
 
-  if (cajaEstado.textContent === "CAJA: ABIERTA") {
-      cajaEstado.textContent = "CAJA: CERRADA";
-      btnToggle.classList.remove("btn-success");
-      btnToggle.classList.add("btn-danger");
-  } else {
-      cajaEstado.textContent = "CAJA: ABIERTA";
-      btnToggle.classList.remove("btn-danger");
-      btnToggle.classList.add("btn-success");
-  }
+    if (cajaEstado.textContent === "CAJA: ABIERTA") {
+        cajaEstado.textContent = "CAJA: CERRADA";
+        btnToggle.classList.remove("btn-success");
+        btnToggle.classList.add("btn-danger");
+    } else {
+        cajaEstado.textContent = "CAJA: ABIERTA";
+        btnToggle.classList.remove("btn-danger");
+        btnToggle.classList.add("btn-success");
+    }
 }
 
 function agregarProducto(codigoBarras, descripcion, precio, stock) {
@@ -43,36 +43,26 @@ function agregarProducto(codigoBarras, descripcion, precio, stock) {
         let cantidad = 1;
 
         newRow.innerHTML = `
-            <td>${codigoBarras}</td>
-            <td>${descripcion}</td>
-            <td class="cantidad">${cantidad}</td>
-            <td>${precio}</td>
-            <td>${(cantidad * precio).toFixed(2)}</td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm" onclick="cambiarCantidad('${codigoBarras}', 1, event)">+</button>
-                <button type="button" class="btn btn-warning btn-sm" onclick="cambiarCantidad('${codigoBarras}', -1, event)">-</button>
-                <button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">Eliminar</button>
-            </td>
-        `;
+        <td class="codigoProducto">${codigoBarras}</td>
+        <td>${descripcion}</td>
+        <td class="cantidad">${cantidad}</td>
+        <td>${precio}</td>
+        <td>${(cantidad * precio).toFixed(2)}</td>
+        <td>
+            <button type="button" class="btn btn-success btn-sm" onclick="cambiarCantidad('${codigoBarras}', 1, event)">+</button>
+            <button type="button" class="btn btn-warning btn-sm" onclick="cambiarCantidad('${codigoBarras}', -1, event)">-</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">Eliminar</button>
+        </td>
+    `;
 
         // Agregar la nueva fila al cuerpo de la tabla
         productTableBody.appendChild(newRow);
-
-        // Actualizar el campo oculto con los IDs de productos
-        const productosInput = document.getElementById('productosInput');
-        let productos = productosInput.value ? productosInput.value.split(',') : [];
-
-        // Evitar duplicados
-        if (!productos.includes(codigoBarras)) {
-            productos.push(codigoBarras); // Agregar el nuevo código del producto
-            productosInput.value = productos.join(','); // Actualizar el campo oculto
-        }
     }
 
     // Actualizar el total de la venta
     actualizarTotalVenta();
+    actualizarProductosInput();
 }
-
 
 // Función para cambiar la cantidad de un producto
 function cambiarCantidad(codigoBarras, cambio, event) {
@@ -98,6 +88,7 @@ function cambiarCantidad(codigoBarras, cambio, event) {
 
     // Actualizar el total de la venta
     actualizarTotalVenta();
+    actualizarProductosInput();
 }
 
 // Función para eliminar un producto
@@ -107,6 +98,7 @@ function eliminarProducto(button) {
 
     // Actualizar el total de la venta después de eliminar
     actualizarTotalVenta();
+    actualizarProductosInput();
 }
 
 // Función para calcular y actualizar el total de la venta
@@ -145,39 +137,65 @@ function actualizarVuelto() {
     document.getElementById("vuelto").textContent = vuelto.toFixed(2);
 }
 
+$(document).ready(function() {
+    $("#formVentas").on("submit", function(event) {
+        event.preventDefault();
 
+        const nroTicket = $("#nroTicket").val();
+        const formaPago = $("#formaPago").val();
+        const totalVenta = document.getElementById("totalVenta").textContent;
+        const productos = [];
 
+        // Recopilar productos de la tabla
+        $("#productTableBody tr").each(function() {
+            const codigo = $(this).find(".codigoProducto").text(); // Corregido para obtener el código
+            const cantidad = $(this).find(".cantidad").text(); // Obtener cantidad correctamente
+            productos.push({ codigo, cantidad: parseInt(cantidad) }); // Asegúrate de pasar la cantidad como número
+        });
 
-document.getElementById('formVentas').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevenir el envío del formulario por defecto
-
-    let formData = new FormData(this);
-    let productosSeleccionados = []; // Suponiendo que los productos se guardan en un array
-
-    // Agregar los IDs de los productos al array
-    document.querySelectorAll('#productTableBody .producto').forEach(function (producto) {
-        let idProducto = producto.getAttribute('data-id'); // Asegúrate de que cada fila tenga un atributo data-id
-        productosSeleccionados.push(idProducto);
-    });
-
-    // Agregar los productos seleccionados al FormData
-    formData.append('productos', productosSeleccionados);
-
-    fetch('./php/caja/realizarVenta.php', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert(data.message); // Alerta de éxito
-            // Aquí puedes agregar lógica para actualizar la interfaz de usuario
-        } else {
-            alert(data.message); // Alerta de error
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Se produjo un error al procesar la venta.'); // Alerta en caso de error en la solicitud
+        // Enviar la solicitud de venta con AJAX
+        $.ajax({
+            url: "./php/caja/realizarVenta.php",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                nroTicket: nroTicket,
+                formaPago: formaPago,
+                totalVenta: totalVenta,
+                productos: productos
+            }),
+            dataType: "json",
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message);
+                    $("#formVentas")[0].reset();
+                    $("#productTableBody").empty(); // Limpiar la tabla después de registrar la venta
+                    actualizarTotalVenta(); // Asegúrate de actualizar el total después de limpiar
+                } else {
+                    alert("Error: " + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Estado:", status);
+                console.error("Error:", error);
+                console.error("Detalles del error:", xhr.responseText);
+                alert("Hubo un error al procesar la venta.");
+            }
+        });
     });
 });
+
+function actualizarProductosInput() {
+    const productosInput = document.getElementById('productosInput');
+    const productos = []; // Crea un array para almacenar los productos
+
+    // Recorre la tabla para obtener los productos y sus cantidades
+    document.querySelectorAll('#productTableBody tr').forEach(row => {
+        const codigo = row.querySelector('.codigoProducto').innerText; // Asumiendo que tienes una celda con la clase 'codigoProducto'
+        const cantidad = row.querySelector('.cantidad').textContent; // Corregido para obtener la cantidad
+        productos.push({ codigo, cantidad });
+    });
+
+    // Establece el valor del input oculto como un JSON
+    productosInput.value = JSON.stringify(productos);
+}
