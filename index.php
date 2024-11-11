@@ -76,11 +76,6 @@ if (!isset($_SESSION['usr'])) {
           <span>BMos</span>
         </div>
 
-        <button class="boton">
-          <ion-icon name="add-outline"></ion-icon>
-          <span>Create New</span>
-        </button>
-
         <nav class="navegacion">
           <ul>
             <li><a href="#inicio"><ion-icon name="home-outline"></ion-icon>Inicio</a></li>

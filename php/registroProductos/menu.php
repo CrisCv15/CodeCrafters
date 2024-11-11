@@ -14,14 +14,14 @@
 <body>
   <div class="table-wrapper">
     <div class="col-sm-6" id="AD">
-      <h1 class="text-center p-3">Administrador de Productos</h1>
+      <h1 class="text-center p-3" style="color: white;">Administrador de Productos</h1>
     </div>
     
   </div>
 
   <!-- Botón para mostrar/ocultar formulario -->
   <div class="text-center">
-    <button class="btn btn-primary" id="mostrarFormulario">Registrar Producto</button>
+    <button class="btn btn-primary m-3" id="mostrarFormulario">Registrar Producto</button>
   </div>
 
   <div class="modal" id="RegistModal" tabindex="-1" role="dialog" aria-labelledby="RegistModalLabel" aria-hidden="true">

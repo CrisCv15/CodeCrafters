@@ -6,9 +6,9 @@
     --color-texto-menu: rgb(134,136,144);
     --color-menu-hover: rgb(238,238,238);
     --color-menu-hover-texto: rgb(0,0,0);
-    --color-boton: rgb(0,0,0);
+    --color-boton: #00B2DA;
     --color-boton-texto: rgb(255,255,255);
-    --color-fondo: #2c2b2b;
+    --color-fondo: #293543;
 }
 
 *{

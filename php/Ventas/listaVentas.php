@@ -63,7 +63,6 @@
                     </div>
                     <div class="col-md-4">
                         <label>Forma de Pago:</label><br>
-                        <input type="checkbox" id="crédito" name="formaPago" value="Crédito"> Credito
                         <input type="checkbox" id="débito" name="formaPago" value="Débito"> Debito
                         <input type="checkbox" id="efectivo" name="formaPago" value="Efectivo"> Efectivo
                     </div>
