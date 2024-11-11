@@ -1,18 +1,77 @@
-// Definición de la función toggleCaja
-function toggleCaja() {
-    const cajaEstado = document.getElementById("cajaStatus");
-    const btnToggle = document.getElementById("toggleCaja");
 
-    if (cajaEstado.textContent === "CAJA: ABIERTA") {
-        cajaEstado.textContent = "CAJA: CERRADA";
-        btnToggle.classList.remove("btn-success");
-        btnToggle.classList.add("btn-danger");
-    } else {
-        cajaEstado.textContent = "CAJA: ABIERTA";
-        btnToggle.classList.remove("btn-danger");
-        btnToggle.classList.add("btn-success");
+
+// Función global para alternar el estado de la caja
+function toggleCaja() {
+    console.log("Función toggleCaja llamada"); // Verificación de llamada
+    const statusLabel = document.getElementById("cajaStatus");
+    const toggleButton = document.getElementById("toggleCaja");
+    const abrir = statusLabel.textContent.includes("CERRADA");
+    const confirmacion = confirm(`¿Estás seguro de que quieres ${abrir ? "abrir" : "cerrar"} la caja?`);
+
+    if (confirmacion) {
+        fetch('./php/caja/actualizar_estado.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ abierta: abrir }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Respuesta de actualizar_estado.php:", data); // Verificación de respuesta
+            if (data.success) {
+                cargarEstadoCaja(); // Actualizar el estado visual después de cambiarlo
+            } else {
+                alert('Error al actualizar el estado de la caja');
+            }
+        })
+        .catch(error => {
+            console.error('Error al actualizar el estado:', error);
+            alert('Hubo un problema al comunicarse con el servidor.');
+        });
     }
 }
+
+// Función para cargar el estado de la caja desde el backend al cargar la página
+function cargarEstadoCaja() {
+    console.log("Cargando estado de la caja"); // Verificación de llamada
+    fetch('./php/caja/estado_caja.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Datos recibidos de estado_caja.php:", data); // Verificación de datos
+            const statusLabel = document.getElementById("cajaStatus");
+            const toggleButton = document.getElementById("toggleCaja");
+
+            if (data.abierta) {
+                console.log("Actualizando estado: CAJA ABIERTA");
+                statusLabel.textContent = "CAJA: ABIERTA";
+                toggleButton.classList.remove("btn-danger");
+                toggleButton.classList.add("btn-success");
+            } else {
+                console.log("Actualizando estado: CAJA CERRADA");
+                statusLabel.textContent = "CAJA: CERRADA";
+                toggleButton.classList.remove("btn-success");
+                toggleButton.classList.add("btn-danger");
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar el estado:', error);
+            alert('Hubo un problema al cargar el estado de la caja.');
+        });
+}
+
+// Ejecutar la función de carga de estado al cargar la página
+window.onload = () => {
+    console.log("window.onload ejecutado");
+    cargarEstadoCaja();
+};
+
+
 
 function agregarProducto(codigoBarras, descripcion, precio, stock) {
     // Crear una nueva fila en la tabla
