@@ -20,7 +20,7 @@ if (!isset($_SESSION['usr'])) {
 </head>
 <body>
     <div class="contenedor-bienvenida">
-    <h1>Los4Hermanos</h1>
+    <h1>Los 4 Hermanos</h1>
         <h1>¡Bienvenido, Admin!</h1>
         <p>Nos alegra verte de nuevo. Puedes gestionar productos, ventas, caja y estadísticas.</p>
 
