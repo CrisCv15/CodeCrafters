@@ -22,15 +22,15 @@
                     <span id="cajaStatus">CAJA: CERRADA</span>
                 </button>
                 <div class="admin-info d-flex align-items-center">
-                    <span style="color: white;">Admin</span>
                     <i class="bi bi-person-circle ms-2"></i>
+                    <span style="color: white;">Admin</span>
                 </div>
             </div>
         </header>
 
         <section class="bg-white p-4 rounded shadow">
             <div class="text-center">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productosModal" onclick="getData()">
+                <button type="button" class="btn btn-light text-white" data-bs-toggle="modal" data-bs-target="#productosModal" onclick="getData()" style="background-color: #00B2D0;">
                     + Agregar Productos
                 </button>
             </div>
@@ -125,9 +125,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 border">
                         <div class="bg-light p-3 rounded">
-                            <h6>Total Venta: <span id="totalVenta">$0</span></h6>
+                            <h6 class="d-flex p-1 text-white" style="background-color: #00B2D0;">Total Venta: <span id="totalVenta">$0</span></h6>
                             <input type="hidden" name="totalVenta" id="totalVentaInput">
                             
                             <input type="hidden" name="productos[]" id="productosInput">
@@ -137,6 +137,7 @@
                                 <input type="number" class="form-control" name="nroTicket" id="nroTicket" placeholder="Ingrese Numero de Ticket" required>
                             </div>
                             <div class="mb-2">
+                                <i class="bi bi-cash"></i>
                                 <label class="form-label">Método de Pago</label>
                                 <select class="form-select" name="formaPago" id="formaPago" required>
                                     <option>Débito</option>
@@ -144,6 +145,7 @@
                                 </select>
                             </div>
                             <div class="mb-2">
+                                <i class="bi bi-cash-coin"></i>
                                 <strong>Monto Efectivo: $<span id="montoEfectivo">0.00</span></strong>
                                 <input type="number" id="montoEfectivoInput" placeholder="Ingrese Monto Efectivo" oninput="actualizarMontoEfectivo()" />
                             </div>

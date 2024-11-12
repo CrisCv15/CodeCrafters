@@ -1,17 +1,17 @@
 /* Colores y fuentes */
 :root {
-    --color-primario: #00a3e0;
+    --color-primario: #00B2D0;
     --color-secundario: #f8f9fa;
     --color-texto: #333;
     --color-texto-secundario: #777;
     --color-borde: #ccc;
-    --color-iconos: #5cb85c;
+    --color-iconos: #65EA72;
     --color-icono-imprimir: #5a5a5a;
     --color-fondo-tabla: #ffffff;
-    --color-boton: var(--color-primario);
-    --color-boton-hover: #007bbd;
+    --color-boton: #00B2D0;
+    --color-boton-hover: #00B2D0;
     --color-hover-fila: #f0f8ff;
-    --color-fondo: #2c2b2b;
+    --color-fondo: #293543;
     font-family: 'Arial', sans-serif;
 }
 

@@ -46,7 +46,7 @@
 <body>
     <div id="ventas">
     <div class="container">
-        <h2 class="text-center my-4" style="background-color: #00a3e0; color: white;">Ventas Registradas</h2>
+        <h4 class="text-center my-4 p-2" style="background-color: #00B2D0; color: white;">Ventas Registradas</h4>
 
        
         <div class="card">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="mt-3 text-right">
-                    <button id="btnBuscar" class="btn btn-primary">Buscar</button>
+                    <button id="btnBuscar" class="btn btn-ligth text-white" style="background-color: #00B2D0;">Buscar</button>
                 </div>
             </div>
         </div>
