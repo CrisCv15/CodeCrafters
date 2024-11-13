@@ -77,50 +77,58 @@ function agregarProducto(codigoBarras, descripcion, precio, stock) {
     // Crear una nueva fila en la tabla
     const productTableBody = document.getElementById("productTableBody");
     let existingRow = productTableBody.querySelector(`tr[data-codigo-barras="${codigoBarras}"]`);
+    const caja = document.getElementById("cajaStatus");
 
-    if (existingRow) {
-        // Si el producto ya existe, incrementar la cantidad
-        const quantityCell = existingRow.querySelector('.cantidad');
-        let currentQuantity = parseInt(quantityCell.textContent);
-        currentQuantity += 1; // Incrementar la cantidad
+    if(caja.textContent == "CAJA: ABIERTA"){
+        if (existingRow) {
+            // Si el producto ya existe, incrementar la cantidad
+            const quantityCell = existingRow.querySelector('.cantidad');
+            let currentQuantity = parseInt(quantityCell.textContent);
+            currentQuantity += 1; // Incrementar la cantidad
+    
+            // Actualizar la celda de cantidad
+            quantityCell.textContent = currentQuantity;
+    
+            // Actualizar el total del producto
+            const precio = parseFloat(existingRow.cells[3].textContent);
+            existingRow.cells[4].textContent = (currentQuantity * precio).toFixed(2);
+    
+        } else {
+            // Si el producto no existe, crear una nueva fila
+            const newRow = document.createElement("tr");
+    
+            // Establecer un atributo data-codigo-barras para identificar la fila
+            newRow.setAttribute('data-codigo-barras', codigoBarras);
+    
+            // Inicializar cantidad en 1
+            let cantidad = 1;
+    
+            newRow.innerHTML = `
+            <td class="codigoProducto">${codigoBarras}</td>
+            <td>${descripcion}</td>
+            <td class="cantidad">${cantidad}</td>
+            <td>${precio}</td>
+            <td>${(cantidad * precio).toFixed(2)}</td>
+            <td>
+                <button type="button" class="btn btn-success btn-sm" onclick="cambiarCantidad('${codigoBarras}', 1, event)">+</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="cambiarCantidad('${codigoBarras}', -1, event)">-</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">Eliminar</button>
+            </td>
+        `;
+    
+            // Agregar la nueva fila al cuerpo de la tabla
+            productTableBody.appendChild(newRow);
+        }
+    
+        // Actualizar el total de la venta
+        actualizarTotalVenta();
+        actualizarProductosInput();
 
-        // Actualizar la celda de cantidad
-        quantityCell.textContent = currentQuantity;
-
-        // Actualizar el total del producto
-        const precio = parseFloat(existingRow.cells[3].textContent);
-        existingRow.cells[4].textContent = (currentQuantity * precio).toFixed(2);
-
-    } else {
-        // Si el producto no existe, crear una nueva fila
-        const newRow = document.createElement("tr");
-
-        // Establecer un atributo data-codigo-barras para identificar la fila
-        newRow.setAttribute('data-codigo-barras', codigoBarras);
-
-        // Inicializar cantidad en 1
-        let cantidad = 1;
-
-        newRow.innerHTML = `
-        <td class="codigoProducto">${codigoBarras}</td>
-        <td>${descripcion}</td>
-        <td class="cantidad">${cantidad}</td>
-        <td>${precio}</td>
-        <td>${(cantidad * precio).toFixed(2)}</td>
-        <td>
-            <button type="button" class="btn btn-success btn-sm" onclick="cambiarCantidad('${codigoBarras}', 1, event)">+</button>
-            <button type="button" class="btn btn-warning btn-sm" onclick="cambiarCantidad('${codigoBarras}', -1, event)">-</button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">Eliminar</button>
-        </td>
-    `;
-
-        // Agregar la nueva fila al cuerpo de la tabla
-        productTableBody.appendChild(newRow);
+    }else{
+        alert("Antes debe abrir la caja");
     }
 
-    // Actualizar el total de la venta
-    actualizarTotalVenta();
-    actualizarProductosInput();
+    
 }
 
 // Función para cambiar la cantidad de un producto
