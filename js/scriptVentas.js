@@ -70,6 +70,15 @@ window.onload = () => {
     console.log("window.onload ejecutado");
     cargarEstadoCaja();
 };
+        
+        $(window).on('hashchange', function() {
+            let hash = window.location.hash;
+         
+        if(hash == "#caja"){
+            cargarEstadoCaja();
+        }
+          });
+    
 
 
 
@@ -208,7 +217,7 @@ $(document).ready(function() {
     $("#formVentas").on("submit", function(event) {
         event.preventDefault();
 
-        const nroTicket = $("#nroTicket").val();
+        
         const formaPago = $("#formaPago").val();
         const totalVenta = document.getElementById("totalVenta").textContent;
         const productos = [];
@@ -226,7 +235,6 @@ $(document).ready(function() {
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({
-                nroTicket: nroTicket,
                 formaPago: formaPago,
                 totalVenta: totalVenta,
                 productos: productos
