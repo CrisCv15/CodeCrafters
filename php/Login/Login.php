@@ -51,6 +51,6 @@ require "./control.php"; // Incluye el archivo de control
     </div>
 </body>
 <footer class="position-absolute bottom-0 w-100 bg-white text-center text-lg-start">
-    <div class="text-center p-2">© 2024 Copyright: <a href="../../AboutUs/AboutUs.html">Los4Hermanos</a></div>
+    <div class="text-center p-2">© 2024 Copyright: <a href="../../AboutUs\AboutUs/aboutUs.html">Los4Hermanos</a> / <a href="../../AboutUs\AboutUs/aboutUs(Empresa).html">CodeCrafters</a>
 </footer>
 </html>
