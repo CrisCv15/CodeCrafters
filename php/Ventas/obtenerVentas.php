@@ -54,9 +54,13 @@ while ($datos = $sql->fetch_object()) {
         <td>{$fechaHora[1]}</td>
         <td>{$datos->FormaPago}</td>
         <td>{$datos->totalVenta}</td>
+        <td class='text-center'>
+         <button class='btn btn-success' data-bs-toggle='modal' data-bs-target='#productosModal' onclick='mostrarProductos({$datos->NumeroTicket})'>
+                Ver Productos
+            </button>
         
-        <td>
-            <button class='btn btn-success'><i class='fas fa-eye'></i></button>
+        </td>
+        <td class='text-center'>
             <button class='btn btn-info'><i class='fas fa-print'></i></button>
         </td>
     </tr>";

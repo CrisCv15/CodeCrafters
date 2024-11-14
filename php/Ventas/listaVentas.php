@@ -41,12 +41,42 @@
             cargarVentas();
         });
     });
+
+    function mostrarProductos(numeroTicket) {
+    fetch(`./php/Ventas/obtenerProductos.php?numeroTicket=${numeroTicket}`)
+        .then(response => response.json())
+        .then(data => {
+            const productosBody = document.getElementById('productosBody');
+            productosBody.innerHTML = '';
+
+            if (data.length > 0) {
+                let table = '<table class="table"><thead><tr><th>Codigo de Barras</th><th>Descripción</th><th>Precio</th><th>Cantidad</th></tr></thead><tbody>';
+                data.forEach(producto => {
+                    table += `<tr>
+                        <td>${producto.CodigoBarras}</td>
+                        <td>${producto.Descripcion}</td>
+                        <td>${producto.Precio}</td>
+                        <td>${producto.cantidadProducto}</td>
+                    </tr>`;
+                });
+                table += '</tbody></table>';
+                productosBody.innerHTML = table;
+            } else {
+                productosBody.innerHTML = 'No hay productos asociados a esta venta.';
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener los productos:', error);
+            document.getElementById('productosBody').innerHTML = 'Error al cargar los productos.';
+        });
+}
+
     </script>
 </head>
 <body>
     <div id="ventas">
     <div class="container">
-        <h4 class="text-center my-4 p-2" style="background-color: #00B2D0; color: white;">Ventas Registradas</h4>
+        <h2 class="text-center my-4" style="background-color: #00a3e0; color: white;">Ventas Registradas</h2>
 
        
         <div class="card">
@@ -68,7 +98,7 @@
                     </div>
                 </div>
                 <div class="mt-3 text-right">
-                    <button id="btnBuscar" class="btn btn-ligth text-white" style="background-color: #00B2D0;">Buscar</button>
+                    <button id="btnBuscar" class="btn btn-primary">Buscar</button>
                 </div>
             </div>
         </div>
@@ -83,6 +113,7 @@
                         <th scope="col">Hora</th>
                         <th scope="col">Método Pago</th>
                         <th scope="col">Total</th>
+                        <th scope="col">Productos</th>
                         <th scope="col">Opciones</th>
                     </tr>
                 </thead>
@@ -91,6 +122,25 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Modal para mostrar los productos -->
+<div class="modal fade" id="productosModal" tabindex="-1" aria-labelledby="productosModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productosModalLabel">Productos de la Venta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="productosBody">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         <div id="mensaje"></div> <!-- Mensaje de error si ocurre -->
 
