@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     $(document).ready(function () {
-        // Cargar ventas al iniciar la página
+        
         cargarVentas();
 
         // Función para cargar ventas con filtros
@@ -142,7 +142,7 @@
 </div>
 
 
-        <div id="mensaje"></div> <!-- Mensaje de error si ocurre -->
+        <div id="mensaje"></div>
 
         
     </div>

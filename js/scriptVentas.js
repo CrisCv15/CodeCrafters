@@ -1,8 +1,8 @@
 
 
-// Función global para alternar el estado de la caja
+
 function toggleCaja() {
-    console.log("Función toggleCaja llamada"); // Verificación de llamada
+    console.log("Función toggleCaja llamada"); 
     const statusLabel = document.getElementById("cajaStatus");
     const toggleButton = document.getElementById("toggleCaja");
     const abrir = statusLabel.textContent.includes("CERRADA");
@@ -18,7 +18,7 @@ function toggleCaja() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Respuesta de actualizar_estado.php:", data); // Verificación de respuesta
+            console.log("Respuesta de actualizar_estado.php:", data); 
             if (data.success) {
                 cargarEstadoCaja(); // Actualizar el estado visual después de cambiarlo
             } else {
@@ -34,7 +34,7 @@ function toggleCaja() {
 
 // Función para cargar el estado de la caja desde el backend al cargar la página
 function cargarEstadoCaja() {
-    console.log("Cargando estado de la caja"); // Verificación de llamada
+    console.log("Cargando estado de la caja");
     fetch('./php/caja/estado_caja.php')
         .then(response => {
             if (!response.ok) {
@@ -43,7 +43,7 @@ function cargarEstadoCaja() {
             return response.json();
         })
         .then(data => {
-            console.log("Datos recibidos de estado_caja.php:", data); // Verificación de datos
+            console.log("Datos recibidos de estado_caja.php:", data); 
             const statusLabel = document.getElementById("cajaStatus");
             const toggleButton = document.getElementById("toggleCaja");
 
@@ -71,11 +71,10 @@ window.onload = () => {
     cargarEstadoCaja();
 };
         
-        $(window).on('hashchange', function() {
-            let hash = window.location.hash;
-         
-        if(hash == "#caja"){
-            cargarEstadoCaja();
+$(window).on('hashchange', function() {
+  let hash = window.location.hash;  
+  if(hash == "#caja"){
+    cargarEstadoCaja();
         }
           });
     
@@ -142,7 +141,7 @@ function agregarProducto(codigoBarras, descripcion, precio, stock) {
 
 // Función para cambiar la cantidad de un producto
 function cambiarCantidad(codigoBarras, cambio, event) {
-    event.preventDefault(); // Prevenir el comportamiento por defecto
+    event.preventDefault(); 
 
     const row = document.querySelector(`tr[data-codigo-barras="${codigoBarras}"]`);
     const quantityCell = row.querySelector('.cantidad');
@@ -188,7 +187,7 @@ function actualizarTotalVenta() {
         total += totalProducto;
     });
 
-    totalVentaElement.textContent = total.toFixed(2); // Actualiza el total en el elemento
+    totalVentaElement.textContent = total.toFixed(2); 
 
     // Actualiza el vuelto en tiempo real
     actualizarVuelto();
@@ -197,7 +196,7 @@ function actualizarTotalVenta() {
 // Función para actualizar el monto efectivo y el vuelto
 function actualizarMontoEfectivo() {
     const montoEfectivoInput = document.getElementById("montoEfectivoInput");
-    const montoEfectivo = parseFloat(montoEfectivoInput.value) || 0; // Asegúrate de obtener el valor
+    const montoEfectivo = parseFloat(montoEfectivoInput.value) || 0; 
     document.getElementById("montoEfectivo").textContent = montoEfectivo.toFixed(2); // Actualiza el monto efectivo
 
     // Actualiza el vuelto en tiempo real
@@ -207,7 +206,7 @@ function actualizarMontoEfectivo() {
 // Función para actualizar el vuelto
 function actualizarVuelto() {
     const total = parseFloat(document.getElementById("totalVenta").textContent) || 0;
-    const montoEfectivo = parseFloat(document.getElementById("montoEfectivo").textContent) || 0; // Asegúrate de usar el texto del monto efectivo
+    const montoEfectivo = parseFloat(document.getElementById("montoEfectivo").textContent) || 0; 
     const vuelto = montoEfectivo - total;
 
     document.getElementById("vuelto").textContent = vuelto.toFixed(2);
@@ -224,9 +223,9 @@ $(document).ready(function() {
 
         // Recopilar productos de la tabla
         $("#productTableBody tr").each(function() {
-            const codigo = $(this).find(".codigoProducto").text(); // Corregido para obtener el código
-            const cantidad = $(this).find(".cantidad").text(); // Obtener cantidad correctamente
-            productos.push({ codigo, cantidad: parseInt(cantidad) }); // Asegúrate de pasar la cantidad como número
+            const codigo = $(this).find(".codigoProducto").text(); 
+            const cantidad = $(this).find(".cantidad").text(); 
+            productos.push({ codigo, cantidad: parseInt(cantidad) });
         });
 
         // Enviar la solicitud de venta con AJAX
@@ -244,8 +243,8 @@ $(document).ready(function() {
                 if (response.success) {
                     alert(response.message);
                     $("#formVentas")[0].reset();
-                    $("#productTableBody").empty(); // Limpiar la tabla después de registrar la venta
-                    actualizarTotalVenta(); // Asegúrate de actualizar el total después de limpiar
+                    $("#productTableBody").empty(); 
+                    actualizarTotalVenta(); 
                 } else {
                     alert("Error: " + response.message);
                 }
@@ -262,12 +261,12 @@ $(document).ready(function() {
 
 function actualizarProductosInput() {
     const productosInput = document.getElementById('productosInput');
-    const productos = []; // Crea un array para almacenar los productos
+    const productos = []; 
 
     // Recorre la tabla para obtener los productos y sus cantidades
     document.querySelectorAll('#productTableBody tr').forEach(row => {
-        const codigo = row.querySelector('.codigoProducto').innerText; // Asumiendo que tienes una celda con la clase 'codigoProducto'
-        const cantidad = row.querySelector('.cantidad').textContent; // Corregido para obtener la cantidad
+        const codigo = row.querySelector('.codigoProducto').innerText; 
+        const cantidad = row.querySelector('.cantidad').textContent; 
         productos.push({ codigo, cantidad });
     });
 

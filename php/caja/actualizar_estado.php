@@ -30,7 +30,7 @@ if ($abierta) {
     $queryVentas = "SELECT SUM(totalVenta) AS totalVentas FROM ventas WHERE FechayHora BETWEEN '$fechaHoraApertura' AND NOW()";
     $resultadoVentas = mysqli_query($conexion, $queryVentas);
     $filaVentas = mysqli_fetch_assoc($resultadoVentas);
-    $totalVentas = $filaVentas['totalVentas'] ? $filaVentas['totalVentas'] : 0; // Asegúrate de que no sea NULL
+    $totalVentas = $filaVentas['totalVentas'] ? $filaVentas['totalVentas'] : 0; 
 
     // Actualizar el último registro para marcar la hora de cierre y el total de ventas
     $query = "UPDATE caja SET Cierre = '$horaActual', Registrototal = '$totalVentas' WHERE FechayHora = (SELECT MAX(FechayHora) FROM caja)";

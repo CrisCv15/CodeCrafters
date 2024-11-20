@@ -1,12 +1,12 @@
 <?php
 include "../conexion_be.php";
 
-// Variables para los filtros
+
 $ventasDesde = isset($_GET['ventasDesde']) ? $_GET['ventasDesde'] : null;
 $ventasHasta = isset($_GET['ventasHasta']) ? $_GET['ventasHasta'] : null;
 $metodoPago = isset($_GET['metodoPago']) ? $_GET['metodoPago'] : null;
 
-// Construir la consulta con JOIN y filtros
+
 $query = "
     SELECT 
         ventas.NumeroTicket, 
@@ -19,7 +19,7 @@ $query = "
     WHERE 1=1
 ";
 
-// Aplicar filtros si existen
+
 if ($ventasDesde) {
     $query .= " AND ventas.FechayHora >= '$ventasDesde'";
 }

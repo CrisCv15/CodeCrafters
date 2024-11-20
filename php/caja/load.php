@@ -2,17 +2,17 @@
 
 require '../conexion_be.php';
 
-// Columnas a mostrar en la tabla
+
 $columns = ['CodigoBarras', 'Precio', 'Descripcion', 'Stock'];
 $columnsBusqueda = ['CodigoBarras', 'Descripcion'];
 
-// Nombre de la tabla
+
 $table = "producto";
 
-// Clave principal de la tabla
+
 $id = 'CodigoBarras';
 
-// Campo a buscar
+
 $campo = isset($_POST['campo']) ? $conexion->real_escape_string($_POST['campo']) : null;
 
 // Filtrado

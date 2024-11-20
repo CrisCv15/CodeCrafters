@@ -26,7 +26,7 @@ body{
     align-items: center;
 }
 
-/* Estilos para el contenedor principal */
+
 .contenedor-principal {
     display: flex;
     height: 100%;
@@ -34,7 +34,7 @@ body{
     background-color: var(--color-fondo);
 }
 
-/* Barra lateral */
+
 .barra-lateral {
     width: 250px;
     height: 100%;

@@ -1,10 +1,10 @@
 <?php
 // Verificar si ya hay una sesión activa antes de iniciar una nueva
 if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Solo iniciar la sesión si no está ya iniciada
+    session_start(); 
 }
 
-// Conexión a la base de datos
+
 require_once '../conexion_be.php';
 
 // Inicializar variables para los errores

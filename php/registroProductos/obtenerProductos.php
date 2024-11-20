@@ -1,11 +1,10 @@
 <?php
 include "../conexion_be.php";  
 
-// Consulta para obtener todos los productos
 $sql = $conexion->query("SELECT * FROM producto");
 
 if (!$sql) {
-    // Si hay un error en la consulta, muéstralo para depurar
+    
     echo "Error en la consulta: " . $conexion->error;
     exit();
 }
@@ -29,14 +28,14 @@ while ($datos = $sql->fetch_object()) {
     </tr>";
 }
 
-// Si no hay productos, devuelve un mensaje
+
 if (empty($output)) {
     $output = "<tr><td colspan='5'>No se encontraron productos</td></tr>";
 }
 
 echo $output;
 
-// Cerrar la conexión
+
 $conexion->close();
 ?>
 

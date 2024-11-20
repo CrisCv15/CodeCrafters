@@ -1,4 +1,4 @@
-/* Colores y fuentes */
+
 :root {
     --color-primario: #00B2D0;
     --color-secundario: #f8f9fa;
@@ -15,7 +15,7 @@
     font-family: 'Arial', sans-serif;
 }
 
-/* Estructura general de la sección de ventas */
+
 #ventas {
     background-color: var(--color-fondo); 
     color: var(--color-texto);
@@ -24,7 +24,7 @@
     padding: 20px;
 }
 
-/* Estilo para el contenedor de ventas */
+
 #ventas .container {
     background-color: #ffffff;
     padding: 20px;
@@ -34,7 +34,7 @@
     margin: 0 auto;
 }
 
-/* Sección de búsqueda dentro de la sección de ventas */
+
 #ventas .search-section {
     background-color: var(--color-primario);
     padding: 15px;
@@ -82,7 +82,7 @@
     font-weight: normal;
 }
 
-/* Tabla de ventas */
+
 #ventas .table {
     width: 100%;
     border-collapse: collapse;
@@ -124,7 +124,7 @@
     color: var(--color-icono-imprimir);
 }
 
-/* Paginación */
+
 #ventas .pagination {
     display: flex;
     justify-content: flex-end;
@@ -149,7 +149,6 @@
     color: white;
 }
 
-/* Responsivo */
 @media screen and (max-width: 768px) {
     #ventas .search-section input,
     #ventas .search-section button {

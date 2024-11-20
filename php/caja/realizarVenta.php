@@ -1,29 +1,29 @@
 <?php
-require_once '../conexion_be.php'; // Asegúrate de ajustar la ruta si es necesario
+require_once '../conexion_be.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Leer el contenido JSON de la solicitud
+    
     $input = json_decode(file_get_contents('php://input'), true);
 
     $formaPago = $input['formaPago'] ?? null;
     $totalVenta = $input['totalVenta'] ?? null;
-    $productos = $input['productos'] ?? []; // Decodificar productos en JSON
+    $productos = $input['productos'] ?? []; 
 
     // Verificar que se hayan recibido todos los datos necesarios
     if ($formaPago && $totalVenta && !empty($productos)) {
-        // Iniciar la transacción
+        
         $conexion->begin_transaction();
 
         try {
-            // Insertar en la tabla de ventas sin el Número de Ticket, ya que es autoincrement
+            
             $stmtVenta = $conexion->prepare("INSERT INTO ventas (FechayHora, FormaPago, totalVenta) VALUES (NOW(), ?, ?)");
-            $stmtVenta->bind_param("sd", $formaPago, $totalVenta); // 'sd' para string y decimal
+            $stmtVenta->bind_param("sd", $formaPago, $totalVenta); 
 
             if (!$stmtVenta->execute()) {
                 throw new Exception("Error al registrar la venta: " . $stmtVenta->error);
             }
 
-            // Obtener el número de ticket generado automáticamente
+           
             $nroTicket = $conexion->insert_id;
 
             // Insertar productos en ventasproductos

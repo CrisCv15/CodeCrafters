@@ -1,18 +1,18 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-// Verificar si ya hay una sesión activa antes de iniciar una nueva
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+
 if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Solo iniciar la sesión si no está ya iniciada
+    session_start(); 
 }
 
-// Si el usuario ya ha iniciado sesión, redirigirlo a la página de inicio
+
 if (isset($_SESSION['usr'])) {
     header("Location: inicio.php");
     exit;
 }
 
-require "./control.php"; // Incluye el archivo de control
+require "./control.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="es">

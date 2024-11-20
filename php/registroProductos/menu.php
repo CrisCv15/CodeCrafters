@@ -19,7 +19,7 @@
     
   </div>
 
-  <!-- Botón para mostrar/ocultar formulario -->
+  
   <div class="text-center">
     <button class="btn btn-primary m-3" id="mostrarFormulario">Registrar Producto</button>
   </div>
@@ -60,7 +60,7 @@
       </div>
     </div>
   </div>
-  <!-- Los mensaje se cargarán aquí -->
+  
   <div id="mensaje"></div>
 
   <div class="col-12 d-flex justify-content-center">
@@ -75,7 +75,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Los productos se cargarán aquí dinámicamente -->
+        <!-- Aca se cargan los productos -->
       </tbody>
     </table>
   </div>

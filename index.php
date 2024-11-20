@@ -17,7 +17,7 @@ if (!isset($_SESSION['usr'])) {
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      // Función para confirmar cierre de sesión
+      
       function confirmarCerrarSesion(event) {
         event.preventDefault();
         const confirmar = confirm("¿Estás seguro de que quieres cerrar sesión?");
@@ -26,7 +26,7 @@ if (!isset($_SESSION['usr'])) {
         }
       }
 
-      // Función para cargar contenido dinámicamente
+      
       function cargarContenido(hash) {
         let url = '';
         switch (hash) {
@@ -66,7 +66,7 @@ if (!isset($_SESSION['usr'])) {
   </head>
   <body>
 
-    <!-- Contenedor principal con flexbox -->
+    
     <div class="contenedor-principal">
       
       <!-- Barra lateral -->
@@ -94,7 +94,7 @@ if (!isset($_SESSION['usr'])) {
 
       <!-- Contenedor de contenido principal -->
       <div class="contenido-principal">
-        <!-- Aquí se cargará el contenido dinámico -->
+        <!-- Aca se carga el contenido -->
       </div>
 
     </div> 
